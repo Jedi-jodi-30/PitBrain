@@ -42,24 +42,25 @@ class GlobalPaceAnalysis:
 class DriverComparisonAnalysis:
     """Pace analysis narrowed to a specific set of drivers."""
 
-    def __init__(self, clean_laps: pd.DataFrame):
+    def __init__(self, clean_laps: pd.DataFrame, drivers: list[str] = None):
         self.clean_laps = clean_laps
+        self.drivers = drivers
 
-    def _laps_for(self, drivers: list[str]) -> pd.DataFrame:
-        return self.clean_laps[self.clean_laps['Driver'].isin(drivers)]
+    def _laps_for(self) -> pd.DataFrame:
+        return self.clean_laps[self.clean_laps['Driver'].isin(self.drivers)]
 
-    def median_pace(self, drivers: list[str]) -> pd.DataFrame:
-        subset = self._laps_for(drivers)
+    def median_pace(self) -> pd.DataFrame:
+        subset = self._laps_for()
         median = subset.groupby('Driver')['LapTimeSeconds'].median().sort_values()
         return pd.DataFrame(median).reset_index()
 
-    def mean_pace(self, drivers: list[str]) -> pd.DataFrame:
-        subset = self._laps_for(drivers)
+    def mean_pace(self) -> pd.DataFrame:
+        subset = self._laps_for()
         mean = subset.groupby('Driver')['LapTimeSeconds'].mean().sort_values()
         return pd.DataFrame(mean).reset_index()
 
-    def rolling_pace(self, drivers: list[str], window: int = 3) -> pd.DataFrame:
-        subset = self._laps_for(drivers).sort_values(['Driver', 'LapNumber']).copy()
+    def rolling_pace(self, window: int = 3) -> pd.DataFrame:
+        subset = self._laps_for().sort_values(['Driver', 'LapNumber']).copy()
         subset['RollingPace'] = subset.groupby('Driver')['LapTimeSeconds'].transform(
             lambda x: x.rolling(window, min_periods=1).mean()
         )
@@ -108,5 +109,5 @@ class PaceAnalysis:
         self.comparison = DriverComparisonAnalysis(self.clean_laps)
 
 
-analysis = PaceAnalysis()
-print(analysis.global_analysis.median_pace())
+# analysis = PaceAnalysis()
+# print(analysis.global_analysis.median_pace())
