@@ -1,4 +1,5 @@
 import fastf1 as ff1
+import os
 import pandas as pd
 
 def get_session(year, event, session_type,check_cache=True):
@@ -8,9 +9,10 @@ def get_session(year, event, session_type,check_cache=True):
     Parameters:
     year (int): The year of the session.
     event (str): The event name (e.g., 'Monza').
-    session_type (str): The session type (e.g., 'R' for race).  
+    session_type (str): The session type (e.g., 'R' for race).
     """
     if check_cache:
+        os.makedirs('fastf1_cache', exist_ok=True)
         ff1.Cache.enable_cache('fastf1_cache')
     session = ff1.get_session(year, event, session_type)
     return session
