@@ -65,10 +65,13 @@ def _title(ax, text):
     ax.set_title(text, loc="left", fontsize=13, fontweight="bold", color=INK_PRIMARY)
 
 
+_fastest_lap = pa.analysis.global_analysis.fastest_lap()  # computed once, reused as a default below
+
+
 # ---------------------------------------------------------------------------
 # 1. Median race pace per driver -> ranked horizontal bar (magnitude, sequential)
 # ---------------------------------------------------------------------------
-def plot_median_pace(df=pa.median_pace_drivers_df):
+def plot_median_pace(df=pa.analysis.global_analysis.median_pace()):
     data = df.sort_values("LapTimeSeconds", ascending=True)
     colors = [ACCENT_ORANGE if i == 0 else SEQ_BLUE for i in range(len(data))]
 
@@ -90,9 +93,9 @@ def plot_median_pace(df=pa.median_pace_drivers_df):
 # ---------------------------------------------------------------------------
 # 2. Fastest lap per driver -> ranked horizontal bar, race-fastest lap called out
 # ---------------------------------------------------------------------------
-def plot_fastest_lap_per_driver(df=pa.fastest_laps_per_driver_df):
+def plot_fastest_lap_per_driver(df=pa.analysis.global_analysis.fastest_lap_per_driver()):
     data = df.sort_values("LapTimeSeconds", ascending=True)
-    colors = [ACCENT_ORANGE if drv == pa.fastest_lap_driver else SEQ_BLUE for drv in data["Driver"]]
+    colors = [ACCENT_ORANGE if drv == _fastest_lap["Driver"] else SEQ_BLUE for drv in data["Driver"]]
 
     fig, ax = plt.subplots(figsize=(8, 0.35 * len(data) + 1))
     bars = ax.barh(data["Driver"], data["LapTimeSeconds"], color=colors)
@@ -101,8 +104,8 @@ def plot_fastest_lap_per_driver(df=pa.fastest_laps_per_driver_df):
     _style_axes(ax, xlabel="Fastest lap time (s)")
     _title(ax, "Fastest Lap by Driver")
     ax.text(0.99, 1.06,
-             f"Race fastest: {pa.fastest_lap_driver} — {pa.fastest_lap_time:.3f}s "
-             f"(lap {int(pa.fastest_lap_lap_number)}, {pa.fastest_lap_compound})",
+             f"Race fastest: {_fastest_lap['Driver']} — {_fastest_lap['LapTimeSeconds']:.3f}s "
+             f"(lap {int(_fastest_lap['LapNumber'])}, {_fastest_lap['Compound']})",
              transform=ax.transAxes, ha="right", va="bottom", fontsize=9, color=INK_SECONDARY)
 
     for bar, value in zip(bars, data["LapTimeSeconds"]):
@@ -116,7 +119,7 @@ def plot_fastest_lap_per_driver(df=pa.fastest_laps_per_driver_df):
 # ---------------------------------------------------------------------------
 # 3. Mean vs median pace per driver -> dumbbell (1 hue, 2 shades; shows skew)
 # ---------------------------------------------------------------------------
-def plot_mean_pace(mean_df=pa.mean_lap_time_per_driver_df, median_df=pa.median_pace_drivers_df):
+def plot_mean_pace(mean_df=pa.analysis.global_analysis.mean_pace(), median_df=pa.analysis.global_analysis.median_pace()):
     data = (
         mean_df.rename(columns={"LapTimeSeconds": "Mean"})
         .merge(median_df.rename(columns={"LapTimeSeconds": "Median"}), on="Driver")
@@ -149,7 +152,7 @@ def plot_mean_pace(mean_df=pa.mean_lap_time_per_driver_df, median_df=pa.median_p
 #    minimum — a true diverging/bipolar chart would need a negative pole that
 #    doesn't exist here, so this renders as a bar from a zero baseline)
 # ---------------------------------------------------------------------------
-def plot_pace_delta(df=pa.pace_delta_to_fastest_lap_df):
+def plot_pace_delta(df=pa.analysis.global_analysis.pace_delta()):
     data = df.sort_values("PaceDelta", ascending=True)
 
     fig, ax = plt.subplots(figsize=(8, 0.35 * len(data) + 1))
@@ -172,8 +175,8 @@ def plot_pace_delta(df=pa.pace_delta_to_fastest_lap_df):
 # ---------------------------------------------------------------------------
 # 5. Rolling pace over the race -> emphasis line chart (top-N highlighted, rest gray)
 # ---------------------------------------------------------------------------
-def plot_rolling_pace(df=pa.rolling_pace_df, top_n=6):
-    leaders = pa.median_pace_drivers_df.sort_values("LapTimeSeconds")["Driver"].head(top_n).tolist()
+def plot_rolling_pace(df=pa.analysis.global_analysis.rolling_pace(), top_n=6):
+    leaders = pa.analysis.global_analysis.median_pace().sort_values("LapTimeSeconds")["Driver"].head(top_n).tolist()
 
     fig, ax = plt.subplots(figsize=(11, 6))
 
