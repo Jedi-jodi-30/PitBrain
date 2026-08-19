@@ -19,6 +19,7 @@ Output the extracted information in a structured format as a dictionary with the
 - "event": The event name (str or None if not found).
 - "session_type": The session type (str or None if not found, e.g., "R" for race, "Q" for qualifying, "P" for practice).
 - "analysis_type": The type of analysis requested (str, either "global_pace_analysis" or "driver_pace_comparison_analysis", or None if not found).
+- "drivers": Only when analysis_type is "driver_pace_comparison_analysis": a list of the driver names or codes the user named for comparison (e.g. ["Verstappen", "Piastri"] or ["VER", "PIA"]). Otherwise an empty list.
 """
 
 # Constrains the model to emit exactly this shape as its entire response —
@@ -34,8 +35,12 @@ RESPONSE_SCHEMA = {
             "type": ["string", "null"],
             "enum": ["global_pace_analysis", "driver_pace_comparison_analysis", None],
         },
+        "drivers": {
+            "type": "array",
+            "items": {"type": "string"},
+        },
     },
-    "required": ["year", "event", "session_type", "analysis_type"],
+    "required": ["year", "event", "session_type", "analysis_type", "drivers"],
 }
 
 def parse_user_query(user_query: str) -> dict:
@@ -70,9 +75,10 @@ def parse_user_query(user_query: str) -> dict:
             "event": None,
             "session_type": None,
             "analysis_type": None,
+            "drivers": [],
         }
 
     return structured_output
 
-intent = parse_user_query(" Do pace analysis for the 2026 Hungary Grand Prix race session")
+intent = parse_user_query(" Do pace analysis for the 2026 Hungary Grand Prix race session between Verstappen and Piastri")
 print(intent)
