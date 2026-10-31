@@ -13,12 +13,17 @@ from ollama import ChatResponse, chat
 
 prompt = """
 You are an intent parser agent. Your task is to extract structured information from the user's query regarding Formula 1 race sessions and analysis requests.
-The user may ask for race pace analysis (global pace analysis), or a comparison between two drivers.
+The user may ask for:
+- race pace analysis ("global_pace_analysis") — raw pace numbers/statistics for the field
+- a comparison between two drivers ("driver_pace_comparison_analysis")
+- a narrative rundown / recap / summary / "what happened" story of a race weekend
+  ("race_weekend_rundown") — phrases like "give me a rundown of...", "recap...",
+  "summarize the race...", "what happened at...", "tell me the story of..."
 Output the extracted information in a structured format as a dictionary with the following keys:
 - "year": The year of the session (int or None if not found).
 - "event": The event name (str or None if not found).
-- "session_type": The session type (str or None if not found, e.g., "R" for race, "Q" for qualifying, "P" for practice).
-- "analysis_type": The type of analysis requested (str, either "global_pace_analysis" or "driver_pace_comparison_analysis", or None if not found).
+- "session_type": The session type (str or None if not found, e.g., "R" for race, "Q" for qualifying, "P" for practice). Default to "R" for a rundown/recap request unless the user clearly asks about qualifying or practice.
+- "analysis_type": The type of analysis requested (str, one of "global_pace_analysis", "driver_pace_comparison_analysis", "race_weekend_rundown", or None if not found).
 - "drivers": Only when analysis_type is "driver_pace_comparison_analysis": a list of the driver names or codes the user named for comparison (e.g. ["Verstappen", "Piastri"] or ["VER", "PIA"]). Otherwise an empty list.
 """
 
@@ -33,7 +38,8 @@ RESPONSE_SCHEMA = {
         "session_type": {"type": ["string", "null"]},
         "analysis_type": {
             "type": ["string", "null"],
-            "enum": ["global_pace_analysis", "driver_pace_comparison_analysis", None],
+            "enum": ["global_pace_analysis", "driver_pace_comparison_analysis",
+                     "race_weekend_rundown", None],
         },
         "drivers": {
             "type": "array",
@@ -80,5 +86,7 @@ def parse_user_query(user_query: str) -> dict:
 
     return structured_output
 
-intent = parse_user_query(" Do pace analysis for the 2026 Hungary Grand Prix race session between Verstappen and Piastri")
-print(intent)
+
+if __name__ == "__main__":
+    intent = parse_user_query(" Do pace analysis for the 2026 Hungary Grand Prix race session between Verstappen and Piastri")
+    print(intent)
