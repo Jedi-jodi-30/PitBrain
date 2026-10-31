@@ -42026,5 +42026,195 @@
       ],
       "excluded_unverified": 1
     }
+  },
+  {
+    "timestamp": "2026-10-31T16:53:38.952050+00:00",
+    "query": "give me a rundown of monza race 2023",
+    "route": "weekend_rundown",
+    "blocked": false,
+    "result": {
+      "report_path": "C:\\projects\\PitBrain\\analysis_agent\\..\\supervisor\\..\\report_suite\\..\\reports\\monza_2023_weekend_story.html",
+      "session": "Italian Grand Prix 2023 \u2014 Race",
+      "headline": "Tyre Strategies and Pit Stops Decide the F1 Weekend",
+      "dek": "Who got the most track position from a pit stop, and who left it all on the track?",
+      "storylines": [
+        {
+          "title": "Aston Martin extracts the most track position per pit stop",
+          "angle": "achievement",
+          "verified": true
+        },
+        {
+          "title": "STR hits a tyre cliff on lap 43",
+          "angle": "mistake",
+          "verified": true
+        },
+        {
+          "title": "Haas F1 Team's pit strategy costs them track position",
+          "angle": "mistake",
+          "verified": true
+        },
+        {
+          "title": "BOT delivers the biggest climb of the race \u2014 up 4 places",
+          "angle": "achievement",
+          "verified": true
+        },
+        {
+          "title": "VER controls the race from the front",
+          "angle": "achievement",
+          "verified": true
+        },
+        {
+          "title": "SAR leaves the most time on the table across the lap",
+          "angle": "mistake",
+          "verified": true
+        },
+        {
+          "title": "GAS runs the most varied tyre strategy of the weekend \u2014 3 stints",
+          "angle": "insight",
+          "verified": true
+        }
+      ],
+      "excluded_unverified": 1
+    }
+  },
+  {
+    "timestamp": "2026-10-31T17:12:54.930068+00:00",
+    "query": "give me a rundown of monza race 2023",
+    "route": "weekend_rundown",
+    "blocked": false,
+    "result": {
+      "report_path": "C:\\projects\\PitBrain\\analysis_agent\\..\\supervisor\\..\\report_suite\\..\\reports\\monza_2023_weekend_story.html",
+      "session": "Italian Grand Prix 2023 \u2014 Race",
+      "headline": "Tyre Tussle: Mistakes and Masterstrokes",
+      "dek": "From falls to climbs, and strategies to wasted time, a wild ride at the track.",
+      "storylines": [
+        {
+          "title": "HUL suffers the biggest fall of the race \u2014 down 7 places",
+          "angle": "mistake",
+          "verified": true
+        },
+        {
+          "title": "Aston Martin extracts the most track position per pit stop",
+          "angle": "achievement",
+          "verified": true
+        },
+        {
+          "title": "STR hits a tyre cliff on lap 43",
+          "angle": "mistake",
+          "verified": true
+        },
+        {
+          "title": "Haas F1 Team's pit strategy costs them track position",
+          "angle": "mistake",
+          "verified": true
+        },
+        {
+          "title": "BOT delivers the biggest climb of the race \u2014 up 4 places",
+          "angle": "achievement",
+          "verified": true
+        },
+        {
+          "title": "VER controls the race from the front",
+          "angle": "achievement",
+          "verified": true
+        },
+        {
+          "title": "SAR leaves the most time on the table across the lap",
+          "angle": "mistake",
+          "verified": true
+        },
+        {
+          "title": "GAS runs the most varied tyre strategy of the weekend \u2014 3 stints",
+          "angle": "insight",
+          "verified": true
+        }
+      ],
+      "excluded_unverified": 0
+    }
+  },
+  {
+    "timestamp": "2026-10-31T17:19:45.387535+00:00",
+    "query": "give me a rundown of monza race 2023",
+    "route": "weekend_rundown",
+    "blocked": false,
+    "result": {
+      "report_path": "C:\\projects\\PitBrain\\analysis_agent\\..\\supervisor\\..\\report_suite\\..\\reports\\monza_2023_weekend_story.html",
+      "session": "Italian Grand Prix 2023 \u2014 Race",
+      "headline": "Pit Stop Fails and Surprising Strategy Moves",
+      "dek": "Tyre troubles and clever tactics defined the drama of the weekend",
+      "storylines": [
+        {
+          "title": "HUL suffers the biggest fall of the race \u2014 down 7 places",
+          "angle": "mistake",
+          "verified": true
+        },
+        {
+          "title": "Aston Martin extracts the most track position per pit stop",
+          "angle": "achievement",
+          "verified": true
+        },
+        {
+          "title": "STR hits a tyre cliff on lap 43",
+          "angle": "mistake",
+          "verified": true
+        },
+        {
+          "title": "Haas F1 Team's pit strategy costs them track position",
+          "angle": "mistake",
+          "verified": true
+        },
+        {
+          "title": "BOT delivers the biggest climb of the race \u2014 up 4 places",
+          "angle": "achievement",
+          "verified": true
+        },
+        {
+          "title": "GAS runs the most varied tyre strategy of the weekend \u2014 3 stints",
+          "angle": "insight",
+          "verified": true
+        }
+      ],
+      "excluded_unverified": 2
+    }
+  },
+  {
+    "timestamp": "2026-10-31T17:21:14.789109+00:00",
+    "query": "give me a rundown of the 2026 Hungarian Grand Prix",
+    "route": "weekend_rundown",
+    "blocked": false,
+    "result": {
+      "report_path": "C:\\projects\\PitBrain\\analysis_agent\\..\\supervisor\\..\\report_suite\\..\\reports\\hungarian_grand_prix_2026_weekend_story.html",
+      "session": "Hungarian Grand Prix 2026 \u2014 Race",
+      "headline": " tyre titans and strategic stumbles dominate F1 weekend",
+      "dek": "Pit lane heroes and pit lane pitfalls define a race to remember",
+      "storylines": [
+        {
+          "title": "Mercedes extracts the most track position per pit stop",
+          "angle": "achievement",
+          "verified": true
+        },
+        {
+          "title": "BOT's average is dragged up by a handful of slow laps",
+          "angle": "mistake",
+          "verified": true
+        },
+        {
+          "title": "SAI manages the soft tyre best",
+          "angle": "achievement",
+          "verified": true
+        },
+        {
+          "title": "Haas F1 Team's pit strategy costs them track position",
+          "angle": "mistake",
+          "verified": true
+        },
+        {
+          "title": "GAS runs the most varied tyre strategy of the weekend \u2014 4 stints",
+          "angle": "insight",
+          "verified": true
+        }
+      ],
+      "excluded_unverified": 3
+    }
   }
 ]

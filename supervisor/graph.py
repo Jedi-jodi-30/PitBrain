@@ -42,6 +42,14 @@ MAX_NARRATION_ROUNDS = 2
 RUN_LOG_PATH = os.path.join(os.path.dirname(__file__), "run_log.json")
 
 
+def _progress(msg: str) -> None:
+    """Explicit flush on every line — stdout block-buffers when piped to a file (e.g. a
+    backgrounded run), so without this a multi-minute run (several sequential Ollama calls,
+    one per storyline per draft round) prints nothing at all until it finishes, which reads
+    identically to a hang even when it's working the whole time."""
+    print(f"[pitbrain] {msg}", flush=True)
+
+
 class PitBrainState(TypedDict, total=False):
     query: str
     route: str | None
@@ -117,6 +125,7 @@ clearly meant."""
 
 
 def supervisor_node(state: PitBrainState) -> dict:
+    _progress(f"supervisor: routing {state['query']!r}...")
     response: ChatResponse = chat(
         MODEL,
         messages=[
@@ -138,6 +147,7 @@ def supervisor_node(state: PitBrainState) -> dict:
 
     routed = fn(**call.function.arguments)
     route = routed.pop("route")
+    _progress(f"supervisor: routed to {route!r} with {routed}")
     return {"route": route, "route_args": routed}
 
 
@@ -153,6 +163,7 @@ def route_after_supervisor(state: PitBrainState) -> str:
 def analysis_node(state: PitBrainState) -> dict:
     route = state.get("route")
     args = state.get("route_args", {})
+    _progress(f"analysis: fetching + computing for route={route!r} ({args})...")
 
     try:
         year = int(args["year"])
@@ -162,7 +173,11 @@ def analysis_node(state: PitBrainState) -> dict:
         return {"analysis": {"error": f"Invalid routed arguments {args!r}: {type(e).__name__}: {e}"}}
 
     if route == "weekend_rundown":
-        return {"analysis": build_storylines(year, event, session_type)}
+        result = build_storylines(year, event, session_type)
+        n = len(result.get("storylines", [])) if "error" not in result else 0
+        _progress(f"analysis: done — {n} storyline candidate(s)" if "error" not in result
+                   else f"analysis: failed — {result['error']}")
+        return {"analysis": result}
 
     if route in ("pace_analysis", "driver_comparison"):
         intent = {
@@ -175,6 +190,7 @@ def analysis_node(state: PitBrainState) -> dict:
             result = fetch_data_analysis(intent)
         except Exception as e:
             result = {"error": f"{type(e).__name__}: {e}"}
+        _progress("analysis: done" if "error" not in result else f"analysis: failed — {result['error']}")
         return {"analysis": result}
 
     return {"analysis": {"error": f"Unknown route: {route!r}"}}
@@ -196,10 +212,12 @@ def narration_node(state: PitBrainState) -> dict:
     analysis = state.get("analysis", {})
     driver_names = analysis.get("driver_names", {})
     round_num = state.get("narration_round", 0) + 1
-    for s in analysis.get("storylines", []):
+    storylines = analysis.get("storylines", [])
+    to_draft = [s for s in storylines if not (s.get("verification") or {}).get("passed")]
+    _progress(f"narration round {round_num}: drafting {len(to_draft)}/{len(storylines)} "
+              f"storyline(s) (one Ollama call each, sequential)...")
+    for i, s in enumerate(to_draft, 1):
         prior_verification = s.get("verification")
-        if prior_verification and prior_verification.get("passed"):
-            continue
         # a flagged storyline gets corrective feedback built from exactly what reliability
         # found wrong with it, not a blind redraft — see build_correction_feedback
         feedback = (build_correction_feedback(prior_verification, s, driver_names)
@@ -208,6 +226,7 @@ def narration_node(state: PitBrainState) -> dict:
         s["attempts"] = round_num
         s.setdefault("draft_history", []).append(
             {"attempt": round_num, "narrative": s["narrative"], "correction_feedback": feedback})
+        _progress(f"narration round {round_num}: {i}/{len(to_draft)} done — {s['title']!r}")
     return {"analysis": analysis, "narration_round": round_num}
 
 
@@ -237,6 +256,8 @@ def reliability_node(state: PitBrainState) -> dict:
         if s.get("draft_history"):
             s["draft_history"][-1]["verification"] = v
 
+    passed = sum(1 for s in analysis["storylines"] if s["verification"]["passed"])
+    _progress(f"reliability: {passed}/{len(analysis['storylines'])} storyline(s) verified so far")
     return {"blocked": False, "analysis": analysis}
 
 
@@ -258,6 +279,7 @@ def report_node(state: PitBrainState) -> dict:
     route = state["route"]
     analysis = state["analysis"]
     args = state["route_args"]
+    _progress(f"report: publishing route={route!r}...")
 
     if route == "weekend_rundown":
         storylines = analysis["storylines"]
@@ -287,12 +309,15 @@ def report_node(state: PitBrainState) -> dict:
         result["report_path"] = out_path
         result["session"] = session_label
 
+    _progress(f"report: published -> {result.get('report_path')}")
     return {"result": result}
 
 
 def blocked_node(state: PitBrainState) -> dict:
+    reason = state.get("blocked_reason", "Unknown failure")
+    _progress(f"blocked: {reason}")
     return {"result": {
-        "error": state.get("blocked_reason", "Unknown failure"),
+        "error": reason,
         "route": state.get("route"),
         "route_args": state.get("route_args"),
     }}
