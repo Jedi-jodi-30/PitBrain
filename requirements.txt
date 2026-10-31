@@ -2,3 +2,5 @@ uv
 fastf1
 pandas
 matplotlib
+ollama
+langgraph
