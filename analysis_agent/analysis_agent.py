@@ -130,6 +130,7 @@ def _json_default(obj):
         return json.loads(obj.to_json(orient="records" if isinstance(obj, pd.DataFrame) else "index"))
     raise TypeError(f"Object of type {obj.__class__.__name__} is not JSON serializable")
 
-intent = parse_user_query("Compare the pace of Verstappen and Piastri in the 2023 Monza race")
-analysis_results = analyze_intent(intent)
-print(json.dumps(analysis_results, indent=4, default=_json_default))
+if __name__ == "__main__":
+    intent = parse_user_query("Compare the pace of Verstappen and Piastri in the 2023 Monza race")
+    analysis_results = analyze_intent(intent)
+    print(json.dumps(analysis_results, indent=4, default=_json_default))

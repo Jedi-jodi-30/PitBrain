@@ -64,10 +64,21 @@ def _default_pair(clean_laps: pd.DataFrame) -> tuple:
     return top2[0], top2[1]
 
 
-def run_all(clean_laps: pd.DataFrame, driver_pair: tuple | None = None) -> dict:
+def run_all(clean_laps: pd.DataFrame, driver_pair: tuple | None = None, output_dir: str | None = None) -> dict:
+    """`output_dir` defaults to the module-level OUTPUT_DIR (the original single-session
+    behavior, kept for __main__ below and backward compatibility) — but callers that handle
+    more than one session per run (report_suite/generate_weekend_story.py in particular) MUST
+    pass a session-specific directory here. Reusing one fixed path for every session is what
+    caused every race after the first to silently serve back the first race's cached facts and
+    charts — the output path has to vary with the session, not just the computed values."""
+    output_dir = output_dir or OUTPUT_DIR
+    charts_dir = os.path.join(output_dir, "charts")
+    facts_path = os.path.join(output_dir, "facts.json")
+    manifest_path = os.path.join(output_dir, "charts_manifest.json")
+
     driver_a, driver_b = driver_pair or _default_pair(clean_laps)
 
-    os.makedirs(CHARTS_DIR, exist_ok=True)
+    os.makedirs(charts_dir, exist_ok=True)
     all_facts = []
     chart_paths = {}
     failures = []
@@ -75,10 +86,13 @@ def run_all(clean_laps: pd.DataFrame, driver_pair: tuple | None = None) -> dict:
     def _store(name: str, result: dict):
         all_facts.extend(result["facts"])
         if result["chart"] is not None:
-            path = os.path.join(CHARTS_DIR, f"{name}.png")
+            path = os.path.join(charts_dir, f"{name}.png")
             result["chart"].savefig(path, dpi=150, bbox_inches="tight")
             plt.close(result["chart"])
-            chart_paths[name] = os.path.relpath(path, OUTPUT_DIR)
+            # absolute path, not relative to output_dir — the manifest needs to be
+            # directly usable by a reader that doesn't necessarily know this run's
+            # output_dir (e.g. a report assembled later from a cached manifest)
+            chart_paths[name] = path
 
     for fn in SINGLE_ARG_FUNCTIONS:
         name = fn.__name__
@@ -96,10 +110,10 @@ def run_all(clean_laps: pd.DataFrame, driver_pair: tuple | None = None) -> dict:
             failures.append(name)
             print(f"FAILED {name}: {type(e).__name__}: {e}")
 
-    with open(FACTS_PATH, "w", encoding="utf-8") as f:
+    with open(facts_path, "w", encoding="utf-8") as f:
         json.dump(all_facts, f, indent=2, default=_json_default)
 
-    with open(MANIFEST_PATH, "w", encoding="utf-8") as f:
+    with open(manifest_path, "w", encoding="utf-8") as f:
         json.dump(chart_paths, f, indent=2)
 
     return {
@@ -108,8 +122,9 @@ def run_all(clean_laps: pd.DataFrame, driver_pair: tuple | None = None) -> dict:
         "functions_run": len(SINGLE_ARG_FUNCTIONS) + len(HEAD_TO_HEAD_FUNCTIONS),
         "failures": failures,
         "driver_pair": (driver_a, driver_b),
-        "facts_path": FACTS_PATH,
-        "charts_dir": CHARTS_DIR,
+        "facts_path": facts_path,
+        "manifest_path": manifest_path,
+        "charts_dir": charts_dir,
     }
 
 
