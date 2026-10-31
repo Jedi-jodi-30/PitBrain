@@ -20,9 +20,10 @@ CONTEXT_CHARS = 60  # characters scanned on either side of a cited number for at
 
 STORY_SYSTEM_PROMPT = """You are a Formula 1 journalist writing one paragraph of a race-weekend \
 feature article, in the style of a motorsport analyst (concise, vivid, specific — not a stats \
-dump). You will be given ONE storyline as a JSON block: a headline, whether it's an \
-"achievement" or a "mistake", the driver/team subject ("subject", plus "subject_full_name" if \
-given), and the exact supporting facts.
+dump). You will be given ONE storyline as a JSON block: a headline, an angle — "achievement" \
+(something went well), "mistake" (something went wrong), or "insight" (notable, but not \
+clearly good or bad — write it as neutral context/color, not forced praise or criticism) — the \
+driver/team subject ("subject", plus "subject_full_name" if given), and the exact supporting facts.
 
 Write 2-3 sentences of plain-English narrative prose using ONLY the numbers given to you. Do \
 not invent, estimate, round differently, or calculate any number that is not already present \
@@ -37,8 +38,9 @@ the JSON you were given — if you don't have a number for something, describe i
 instead, with no digits attached. No markdown, no headers, just prose."""
 
 HEADLINE_SYSTEM_PROMPT = """You are a Formula 1 journalist. You will be given a JSON list of \
-this race weekend's storylines (achievements and mistakes, already ranked by how notable they \
-are). Write a short, punchy magazine-style headline (under 12 words) and a one-sentence dek \
+this race weekend's storylines — achievements, mistakes, and neutral insights — already \
+ranked by how notable they are. Write a short, punchy magazine-style headline (under 12 words) \
+and a one-sentence dek \
 (subheading) that together frame the weekend's overall narrative using only what the storyline \
 titles already say — do not introduce any driver, team, or number that isn't in the list.
 
@@ -48,16 +50,69 @@ Respond as JSON only: {"headline": "...", "dek": "..."}"""
 # ---------------------------------------------------------------------------
 # Summarize — the SLM narrates, it never calculates.
 # ---------------------------------------------------------------------------
-def narrate_storyline(storyline: dict) -> str:
-    payload = {k: v for k, v in storyline.items() if k != "chart_key"}
+def narrate_storyline(storyline: dict, feedback: str | None = None) -> str:
+    """Draft (or redraft) this storyline's paragraph. Pass `feedback` (from
+    build_correction_feedback, applied to the previous draft's verification)
+    to turn a redraft into a targeted correction instead of a blind retry."""
+    payload = {k: v for k, v in storyline.items()
+               if k not in ("chart_key", "narrative", "verification", "attempts", "draft_history")}
+    user_content = json.dumps(payload, indent=2)
+    if feedback:
+        user_content += (
+            f"\n\nYour previous draft had problems and must be corrected:\n{feedback}\n"
+            "Rewrite the paragraph fixing exactly these issues. Keep everything else that was "
+            "already accurate."
+        )
     response = ollama.chat(
         model=MODEL,
         messages=[
             {"role": "system", "content": STORY_SYSTEM_PROMPT},
-            {"role": "user", "content": json.dumps(payload, indent=2)},
+            {"role": "user", "content": user_content},
         ],
     )
     return response["message"]["content"].strip()
+
+
+def build_correction_feedback(verification: dict, storyline: dict, driver_names: dict[str, str] | None = None) -> str | None:
+    """Turns a failed verify_storyline() result into a specific instruction for the next
+    narrate_storyline() call, so a redraft fixes exactly what was flagged instead of the model
+    guessing again from scratch."""
+    if verification["passed"]:
+        return None
+    driver_names = driver_names or {}
+    lines = []
+    if verification["unverified_numbers"]:
+        bad = ", ".join(sorted(set(verification["unverified_numbers"])))
+        lines.append(
+            f"- These numbers you wrote do NOT appear in the supporting facts and must be "
+            f"removed or replaced: {bad}. Do not substitute a different invented number either "
+            f"— only use numbers that are literally in the JSON, or describe it in words with "
+            f"no digit at all."
+        )
+    if not verification["subject_mentioned"]:
+        subject = storyline["subject"]
+        name = driver_names.get(subject, storyline.get("subject_full_name", ""))
+        who = f'"{name}" (code {subject})' if name else f'"{subject}"'
+        lines.append(f"- You must explicitly name the subject, {who}, in the paragraph — "
+                      f"do not write about any other driver or team.")
+    return "\n".join(lines)
+
+
+def _fallback_headline(storylines: list[dict]) -> dict:
+    """Used only if the model's headline response isn't valid JSON — still built from this
+    run's actual top storyline, not a generic placeholder string, so even a fallback headline
+    reflects real graph output."""
+    if not storylines:
+        return {"headline": "Race Weekend Story", "dek": ""}
+    top = storylines[0]
+    achievements = sum(1 for s in storylines if s["angle"] == "achievement")
+    mistakes = sum(1 for s in storylines if s["angle"] == "mistake")
+    insights = sum(1 for s in storylines if s["angle"] == "insight")
+    insight_clause = f", {insights} storyline(s) worth watching" if insights else ""
+    return {
+        "headline": top["title"],
+        "dek": f"{achievements} standout drive(s), {mistakes} costly mistake(s){insight_clause} this weekend.",
+    }
 
 
 def narrate_headline(storylines: list[dict]) -> dict:
@@ -70,9 +125,12 @@ def narrate_headline(storylines: list[dict]) -> dict:
         ],
     )
     try:
-        return json.loads(response["message"]["content"].strip())
-    except (json.JSONDecodeError, ValueError):
-        return {"headline": "Race Weekend Story", "dek": ""}
+        parsed = json.loads(response["message"]["content"].strip())
+        if not parsed.get("headline"):
+            raise ValueError("empty headline")
+        return parsed
+    except (json.JSONDecodeError, ValueError, AttributeError):
+        return _fallback_headline(storylines)
 
 
 # ---------------------------------------------------------------------------
@@ -136,17 +194,26 @@ def verify_storyline(narrative: str, storyline: dict, driver_names: dict[str, st
 
 
 def narrate_and_verify(storyline: dict, driver_names: dict[str, str] | None = None, max_attempts: int = 3) -> dict:
-    """One storyline in, {"narrative", "verification"} out. Retries once on
-    failure — a deeper loop would re-prompt with the specific flagged numbers,
-    but a plain retry already clears most single-draft slips."""
-    narrative = narrate_storyline(storyline)
+    """One storyline in, {"narrative", "verification", "draft_history"} out. On failure,
+    redrafts with targeted correction feedback (build_correction_feedback) rather than a
+    blind retry — each attempt is recorded in draft_history so the flag -> correction cycle
+    is visible in the run log, not just the final result."""
+    draft_history = []
+    feedback = None
+    narrative = narrate_storyline(storyline, feedback)
     verification = verify_storyline(narrative, storyline, driver_names)
+    draft_history.append({"attempt": 1, "narrative": narrative, "verification": verification,
+                           "correction_feedback": None})
     attempts = 1
     while not verification["passed"] and attempts < max_attempts:
-        narrative = narrate_storyline(storyline)
+        feedback = build_correction_feedback(verification, storyline, driver_names)
+        narrative = narrate_storyline(storyline, feedback)
         verification = verify_storyline(narrative, storyline, driver_names)
         attempts += 1
-    return {"narrative": narrative, "verification": verification, "attempts": attempts}
+        draft_history.append({"attempt": attempts, "narrative": narrative, "verification": verification,
+                               "correction_feedback": feedback})
+    return {"narrative": narrative, "verification": verification, "attempts": attempts,
+            "draft_history": draft_history}
 
 
 # ---------------------------------------------------------------------------
@@ -166,7 +233,8 @@ def log_run(session_label: str, headline: dict, storylines: list[dict]) -> None:
         "headline": headline,
         "storylines": [
             {"title": s["title"], "angle": s["angle"], "subject": s["subject"],
-             "score": s["score"], "narrative": s["narrative"], "verification": s["verification"]}
+             "score": s["score"], "narrative": s["narrative"], "verification": s["verification"],
+             "draft_history": s.get("draft_history", [])}
             for s in storylines
         ],
     }
