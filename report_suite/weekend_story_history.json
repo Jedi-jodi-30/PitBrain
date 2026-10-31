@@ -1,0 +1,344 @@
+[
+  {
+    "timestamp": "2026-10-31T06:47:20.377761+00:00",
+    "session": "Italian Grand Prix 2023 \u2014 Race",
+    "headline": {
+      "headline": "Tyre Trouble: Drivers Slip Up at the Front",
+      "dek": "Pit laps and tyre mishaps mar a race won by a frontrunner's skill"
+    },
+    "storylines": [
+      {
+        "title": "HUL loses 7 places",
+        "angle": "mistake",
+        "subject": "HUL",
+        "score": 84,
+        "narrative": "H\u00fclkenberg's hopes of a podium were dashed when he slipped 7 places on the track, a 7-place net position change that now sees him 7 spots behind the leader. His team's strategy backfired, and it's left him fighting for a lower finish spot. The drop to 84th place was the result of a disappointing race.",
+        "verification": {
+          "passed": false,
+          "unverified_numbers": [
+            "84"
+          ],
+          "subject_mentioned": false,
+          "cited_numbers": [
+            "7",
+            "7",
+            "7",
+            "84"
+          ]
+        }
+      },
+      {
+        "title": "STR hits a tyre cliff on lap 43",
+        "angle": "mistake",
+        "subject": "STR",
+        "score": 61.005,
+        "narrative": "On lap 43, STR's tyre degradation was starkly revealed as they clipped the tyre cliff, losing 4.067 units of grip. This alarming drop was evident from just their second stint, with their initial stint having shown 1.5 units below the threshold. The severity of the issue led to a concerning loss of control, a stark indication of the team's struggle with tyre management.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "43",
+            "4.067",
+            "1.5"
+          ]
+        }
+      },
+      {
+        "title": "PIA loses 5 places",
+        "angle": "mistake",
+        "subject": "PIA",
+        "score": 60,
+        "narrative": "In a shocking turn of events, PIA's net position change dropped by 5, costing them 5 places. It was a pivotal moment in the race, marking a stark reversal in their fortunes. PIA's loss was swift and decisive, a testament to the ever-shifting dynamics of the grid.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "5",
+            "5"
+          ]
+        }
+      },
+      {
+        "title": "BOT gains 4 places",
+        "angle": "achievement",
+        "subject": "BOT",
+        "score": 48,
+        "narrative": "In a stunning display of tactical prowess, BOT gained an impressive 4 places on the grid, showcasing the team's ability to adapt and outmaneuver their opponents. This calculated risk paid off, as the driver expertly navigated the field to secure a notable net position change. BOT's bold move was a testament to the team's focus on strategic maneuvering.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "4"
+          ]
+        }
+      },
+      {
+        "title": "VER controls the race from the front",
+        "angle": "achievement",
+        "subject": "VER",
+        "score": 48.0,
+        "narrative": "VER dominated the race from pole position, leading 32 laps and reaping a substantial reward. The team's strategic decision to pit VER under the 48-lap mark proved to be a masterstroke, allowing VER to build a commanding margin.",
+        "verification": {
+          "passed": false,
+          "unverified_numbers": [
+            "48"
+          ],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "32",
+            "48"
+          ]
+        }
+      },
+      {
+        "title": "STR gains 3 places",
+        "angle": "achievement",
+        "subject": "STR",
+        "score": 36,
+        "narrative": "It was a remarkable comeback for STR, as the team outperformed expectations by gaining 3 places on the track. Their impressive performance netted them 36 points, a testament to the hard work of their drivers and crew.",
+        "verification": {
+          "passed": false,
+          "unverified_numbers": [
+            "36"
+          ],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "3",
+            "36"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-10-31T06:48:13.849257+00:00",
+    "session": "Italian Grand Prix 2023 \u2014 Race",
+    "headline": {
+      "headline": "Crashes and Comebacks Define Challenging Weekend",
+      "dek": "Mistakes and mishaps mar success for some, but not all."
+    },
+    "storylines": [
+      {
+        "title": "HUL loses 7 places",
+        "angle": "mistake",
+        "subject": "HUL",
+        "score": 84,
+        "narrative": "In a shocking reversal, HUL plummeted 7 places on the starting grid, a devastating net position change of -7. The sudden drop exposes a worrying trend for the team, which now lies 84 points adrift of its championship rivals. This dismal performance has left many questioning HUL's championship ambitions.",
+        "verification": {
+          "passed": false,
+          "unverified_numbers": [
+            "84"
+          ],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "7",
+            "-7",
+            "84"
+          ]
+        }
+      },
+      {
+        "title": "STR hits a tyre cliff on lap 43",
+        "angle": "mistake",
+        "subject": "STR",
+        "score": 61.005,
+        "narrative": "On lap 43, STR faced a critical moment when the team's tyre degradation alarm sounded with a value of 4.067, indicating the car was 1.5 times further from the optimal limit, and the driver was already on their second stint, as confirmed by the data showing 2.0 stints completed. This led to a worrying sign that the team's tyre management strategy was off, culminating in the team hitting the tyre cliff. The alarm sounded at a time when lap number 43 was already high, adding to the team's woes.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "43",
+            "4.067",
+            "1.5",
+            "2.0",
+            "43"
+          ]
+        }
+      },
+      {
+        "title": "PIA loses 5 places",
+        "angle": "mistake",
+        "subject": "PIA",
+        "score": 60,
+        "narrative": "PIA's hopes of a podium finish slipped away as they suffered a dramatic 5-place drop in the standings, a stark reminder of the risks of a mistake that will be difficult to recover from.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "5"
+          ]
+        }
+      },
+      {
+        "title": "BOT gains 4 places",
+        "angle": "achievement",
+        "subject": "BOT",
+        "score": 48,
+        "narrative": "In a move that will delight his Red Bull Racing fans, Max Verstappen surged up the grid to claim a notable 48-place improvement in the standings, netting himself 4 vital positions on the track. The 4-place gain in just this one race, a testament to the team's hard work and strategy, has boosted Verstappen's overall position to an impressive 4 spots ahead of the rest. His bold move has set him up for a strong championship challenge.",
+        "verification": {
+          "passed": false,
+          "unverified_numbers": [
+            "48"
+          ],
+          "subject_mentioned": false,
+          "cited_numbers": [
+            "48",
+            "4",
+            "4",
+            "4"
+          ]
+        }
+      },
+      {
+        "title": "VER controls the race from the front",
+        "angle": "achievement",
+        "subject": "VER",
+        "score": 48.0,
+        "narrative": "VER dominated the race, taking the lead on lap 48 and maintaining control for 32 laps. This impressive display of pace and strategy earned VER a significant score of 48.0. With this strong performance, VER clearly proved themselves to be the team to beat on this day.",
+        "verification": {
+          "passed": false,
+          "unverified_numbers": [
+            "48",
+            "48.0"
+          ],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "48",
+            "32",
+            "48.0"
+          ]
+        }
+      },
+      {
+        "title": "STR gains 3 places",
+        "angle": "achievement",
+        "subject": "STR",
+        "score": 36,
+        "narrative": "With 3 places gained, STR's Charles Leclerc found himself catapulted up the order, his net position change of 3 positions a testament to the team's improvement. Leclerc's 3 gains saw him rise from 10th to 7th, a crucial turnaround in the team's fortunes. Leclerc's 36 score is a notable achievement.",
+        "verification": {
+          "passed": false,
+          "unverified_numbers": [
+            "10",
+            "7",
+            "36"
+          ],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "3",
+            "3",
+            "3",
+            "10",
+            "7",
+            "36"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-10-31T06:48:44.621296+00:00",
+    "session": "Italian Grand Prix 2023 \u2014 Race",
+    "headline": {
+      "headline": "Tyre Blunders and Masterclasses Define Thrilling Weekend",
+      "dek": "Mistakes abound as the pack learns from others' errors."
+    },
+    "storylines": [
+      {
+        "title": "HUL loses 7 places",
+        "angle": "mistake",
+        "subject": "HUL",
+        "score": 84,
+        "narrative": "At the current standings, HUL has plummeted 7 places. This drastic shift in their net position is a stark contrast to their previous performance, showcasing a significant mistake in their strategy. HUL's loss of ground has left them reeling.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "7"
+          ]
+        }
+      },
+      {
+        "title": "STR hits a tyre cliff on lap 43",
+        "angle": "mistake",
+        "subject": "STR",
+        "score": 61.005,
+        "narrative": "During the recent laps, STR hit a severe tyre cliff at lap 43, indicating a significant loss of grip. The driver's car was detected to be degrading at a rate of 4.067 units per stint, exceeding the critical threshold of 1.5 by a considerable margin. This alarming drop in tyre health ultimately led to the tyre cliff, leaving STR vulnerable to further damage.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "43",
+            "4.067",
+            "1.5"
+          ]
+        }
+      },
+      {
+        "title": "PIA loses 5 places",
+        "angle": "mistake",
+        "subject": "PIA",
+        "score": 60,
+        "narrative": "PIA slipped back five positions overall, their net position in the standings now down. A slide of five places is a significant drop, especially considering PIA's relatively high starting point. This downturn comes at a cost.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": []
+        }
+      },
+      {
+        "title": "BOT gains 4 places",
+        "angle": "achievement",
+        "subject": "BOT",
+        "score": 48,
+        "narrative": "In a stunning display of speed and strategy, BOT made a remarkable turnaround on the track, advancing its position by 4 places. The team's tactical decisions clearly paid off, as they capitalized on a number of opportunities to overtake its rivals. With a net gain of 4 positions, BOT's performance has been a highlight of the weekend so far.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "4",
+            "4"
+          ]
+        }
+      },
+      {
+        "title": "VER controls the race from the front",
+        "angle": "achievement",
+        "subject": "VER",
+        "score": 48.0,
+        "narrative": "VER dominated the race, leading 32 laps and showcasing its incredible pace on the track. The team's strategy paid off, as VER's aggressive driving allowed it to pull away from the rest of the field. With its impressive performance, VER has cemented its position as a front-runner in the championship.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "32"
+          ]
+        }
+      },
+      {
+        "title": "STR gains 3 places",
+        "angle": "achievement",
+        "subject": "STR",
+        "score": 36,
+        "narrative": "STR made a remarkable surge, catapulting its car 3 places up the field. The team's impressive net position change speaks to the skill and strategy behind its drivers' performances. This significant jump is a testament to STR's growing competitive edge.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "3"
+          ]
+        }
+      }
+    ]
+  }
+]
