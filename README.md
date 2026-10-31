@@ -54,9 +54,11 @@ degradation, consistency, sector breakdown, speed trap, position, and team-level
 Two detectors reach beyond the catalog entirely: **pit-stop strategy efficiency** (real pit
 counts pulled from the raw, unfiltered laps — `clean_laps` has every pit lap filtered out by
 definition — cross-referenced against each team's net position change) and **qualifying pace
-vs. top speed by team** (an optional second session fetch). Any fetch or compute failure comes
-back as `{"error": ...}` instead of an exception — the graph's contract for "this run can't
-proceed."
+vs. top speed by team**, which fetches a second session and is currently disabled in
+`generate_weekend_story.py` (commented out) — it was stalling the pipeline even with a
+thread+timeout guard, and the root cause isn't confirmed yet. Any fetch or compute failure
+comes back as `{"error": ...}` instead of an exception — the graph's contract for "this run
+can't proceed."
 
 **Narration** — drafts prose per storyline with `llama3.2:3b`, one call each.
 
@@ -82,6 +84,24 @@ shown with a warning, not published with a caveat. Nothing a reader sees has ski
 fact-check. Every draft, every correction prompt, and every verdict is still logged in full
 (`report_suite/weekend_story_history.json`, `supervisor/run_log.json`), so a run that excluded
 storylines is fully auditable even though the report itself stays clean.
+
+### Narrator eval loop
+
+The narration stage is internally named **Roger Kint** (after *The Usual Suspects*' narrator,
+who tells a detailed, confident story that turns out to be mostly fabricated — the exact
+failure mode above, caught for real during testing). Because Roger is expected to be wrong
+sometimes, every draft is scored, not just judged pass/fail:
+
+![PitBrain narrator eval loop](pitbrain_eval_loop.png)
+
+`verify_storyline()` computes **`correctness_pct`** — the % of a draft's checkable claims
+(cited numbers + the implicit subject-attribution claim) that actually trace back to the
+storyline's own facts. Each run aggregates this into `correctness_summary` in
+`weekend_story_history.json`, split into **first-draft** (the narrator's raw, unassisted
+quality) vs. **final** (after the correction loop) — the metric a prompt, model, or temperature
+change should be scored against. See `docs/narrator_reliability.md` for the current knobs, how
+to run an A/B comparison, and a prioritized list of future enhancements (temperature sweeps,
+few-shot examples, best-of-N drafting, LLM-as-judge, a frozen eval set).
 
 **Report** — a self-contained HTML file. The weekend-rundown path writes a magazine-style
 article: headline + dek drafted from only the published storylines, one card per storyline
