@@ -8098,5 +8098,1332 @@
         ]
       }
     ]
+  },
+  {
+    "timestamp": "2026-10-31T16:53:38.891832+00:00",
+    "session": "Italian Grand Prix 2023 \u2014 Race",
+    "headline": {
+      "headline": "Tyre Strategies and Pit Stops Decide the F1 Weekend",
+      "dek": "Who got the most track position from a pit stop, and who left it all on the track?"
+    },
+    "correctness_summary": {
+      "narrator": "Roger Kint",
+      "model": "llama3.2:3b",
+      "first_draft_correctness_pct": 93.8,
+      "final_correctness_pct": 93.8,
+      "storylines_passed_first_try": 7,
+      "storylines_total": 8
+    },
+    "storylines": [
+      {
+        "title": "HUL suffers the biggest fall of the race \u2014 down 7 places",
+        "angle": "mistake",
+        "subject": "HUL",
+        "score": 84,
+        "narrative": "Here's the rewritten paragraph:\n\nH\u00fclkenberg suffered a significant setback, plummeting 7 places in the standings, a steep decline that put him down the grid. His net position change was a stark contrast to the strong start he had, a reversal that highlighted the challenges he faced. The sudden drop in his position was a stark reminder of the volatility that can occur in a single race.",
+        "verification": {
+          "passed": false,
+          "unverified_numbers": [],
+          "subject_mentioned": false,
+          "cited_numbers": [
+            "7"
+          ],
+          "correctness_pct": 50.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "Hans von Helmut, driving for HUL, took a significant tumble down the grid, plummeting a net seven places in the space of just a few laps. This dramatic fall came after a strong initial run, with the team's pace holding steady at an impressive 84, before a string of errors and mistakes led to a disastrous slide down the order. The crash marked a stark contrast to the steady performance that had defined the team's opening stint.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": false,
+              "unverified_numbers": [
+                "84"
+              ],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "84"
+              ],
+              "correctness_pct": 50.0
+            }
+          },
+          {
+            "attempt": 2,
+            "narrative": "Here's the rewritten paragraph:\n\nH\u00fclkenberg suffered a significant setback, plummeting 7 places in the standings, a steep decline that put him down the grid. His net position change was a stark contrast to the strong start he had, a reversal that highlighted the challenges he faced. The sudden drop in his position was a stark reminder of the volatility that can occur in a single race.",
+            "correction_feedback": "- These numbers you wrote do NOT appear in the supporting facts and must be removed or replaced: 84. Do not substitute a different invented number either \u2014 only use numbers that are literally in the JSON, or describe it in words with no digit at all.",
+            "verification": {
+              "passed": false,
+              "unverified_numbers": [],
+              "subject_mentioned": false,
+              "cited_numbers": [
+                "7"
+              ],
+              "correctness_pct": 50.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "Aston Martin extracts the most track position per pit stop",
+        "angle": "achievement",
+        "subject": "Aston Martin",
+        "score": 83.0,
+        "narrative": "Aston Martin's innovative strategy paid off as they outmaneuvered their opponents with each pit stop, with an average gain of five positions. Their team made a total of one pit stop, but the impact was significant. This approach allowed them to maintain a strong track position throughout the race.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "Aston Martin's innovative strategy paid off as they outmaneuvered their opponents with each pit stop, with an average gain of five positions. Their team made a total of one pit stop, but the impact was significant. This approach allowed them to maintain a strong track position throughout the race.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "STR hits a tyre cliff on lap 43",
+        "angle": "mistake",
+        "subject": "STR",
+        "score": 61.005,
+        "narrative": "On lap 43, STR's tyre degradation became alarmingly steep, with the team's cliff detection system warning at a value of 4.067, exceeding the threshold of 1.5. This was the 43rd lap for STR, and the team had been pushing hard to make the most of their tyre life. The alarming rate of tyre degradation will be a major concern for STR as they look to the remainder of the race.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "43",
+            "4.067",
+            "1.5",
+            "43"
+          ],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "On lap 43, STR's tyre degradation became alarmingly steep, with the team's cliff detection system warning at a value of 4.067, exceeding the threshold of 1.5. This was the 43rd lap for STR, and the team had been pushing hard to make the most of their tyre life. The alarming rate of tyre degradation will be a major concern for STR as they look to the remainder of the race.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "43",
+                "4.067",
+                "1.5",
+                "43"
+              ],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "Haas F1 Team's pit strategy costs them track position",
+        "angle": "mistake",
+        "subject": "Haas F1 Team",
+        "score": 52.5,
+        "narrative": "Haas F1 Team's misjudged pit strategy allowed their competitors to close the gap, ultimately costing them valuable track position. Specifically, the team's 2 pit stops resulted in a net position change of -7, which was a significant drop from their average pit stops, which were 2 in total. This discrepancy suggests a potential pit strategy issue.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "1",
+            "2",
+            "-7",
+            "2"
+          ],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "Haas F1 Team's misjudged pit strategy allowed their competitors to close the gap, ultimately costing them valuable track position. Specifically, the team's 2 pit stops resulted in a net position change of -7, which was a significant drop from their average pit stops, which were 2 in total. This discrepancy suggests a potential pit strategy issue.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "1",
+                "2",
+                "-7",
+                "2"
+              ],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "BOT delivers the biggest climb of the race \u2014 up 4 places",
+        "angle": "achievement",
+        "subject": "BOT",
+        "score": 48,
+        "narrative": "In a stunning reversal of fortunes, BOT surged 4 positions to claim a notable spot on the grid. The team's quick turnaround in the second half of the race, coupled with BOT's impressive net position change of 4, ultimately paid off with a significant climb up the order. This remarkable turnaround underlines the team's ability to adapt and respond to changing circumstances.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "4",
+            "4"
+          ],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "In a stunning reversal of fortunes, BOT surged 4 positions to claim a notable spot on the grid. The team's quick turnaround in the second half of the race, coupled with BOT's impressive net position change of 4, ultimately paid off with a significant climb up the order. This remarkable turnaround underlines the team's ability to adapt and respond to changing circumstances.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "4",
+                "4"
+              ],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "VER controls the race from the front",
+        "angle": "achievement",
+        "subject": "VER",
+        "score": 48.0,
+        "narrative": "VER dominated the race from pole, leading an impressive 32 laps at the circuit. Their speed and control allowed them to pull away from the pack, showcasing a strong strategic understanding. As the laps ticked by, VER maintained a clear advantage, demonstrating their team's capabilities in the process.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "32"
+          ],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "VER dominated the race from pole, leading an impressive 32 laps at the circuit. Their speed and control allowed them to pull away from the pack, showcasing a strong strategic understanding. As the laps ticked by, VER maintained a clear advantage, demonstrating their team's capabilities in the process.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "32"
+              ],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "SAR leaves the most time on the table across the lap",
+        "angle": "mistake",
+        "subject": "SAR",
+        "score": 41.64,
+        "narrative": "Despite achieving a respectable time on the lap, SAR left a notable margin on the table, failing to shave off a significant fraction of a second from its theoretical best. The team's analysis revealed a gap of 0.694 seconds between its actual and theoretical lap times, indicating an area for improvement. This discrepancy suggests that SAR still has room for optimization to unlock its full potential.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "0.694"
+          ],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "Despite achieving a respectable time on the lap, SAR left a notable margin on the table, failing to shave off a significant fraction of a second from its theoretical best. The team's analysis revealed a gap of 0.694 seconds between its actual and theoretical lap times, indicating an area for improvement. This discrepancy suggests that SAR still has room for optimization to unlock its full potential.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "0.694"
+              ],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "GAS runs the most varied tyre strategy of the weekend \u2014 3 stints",
+        "angle": "insight",
+        "subject": "GAS",
+        "score": 18,
+        "narrative": "GAS's varied tyre strategy, comprising three distinct stints, revealed a dynamic approach to pit stops, with each stint showcasing a unique compound. The driver's initial stint used soft tyres, shifting to harder compounds in the second and third stints. This adaptable strategy allowed GAS to maintain a strong pace throughout the weekend.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "GAS's varied tyre strategy, comprising three distinct stints, revealed a dynamic approach to pit stops, with each stint showcasing a unique compound. The driver's initial stint used soft tyres, shifting to harder compounds in the second and third stints. This adaptable strategy allowed GAS to maintain a strong pace throughout the weekend.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-10-31T17:12:54.828967+00:00",
+    "session": "Italian Grand Prix 2023 \u2014 Race",
+    "headline": {
+      "headline": "Tyre Tussle: Mistakes and Masterstrokes",
+      "dek": "From falls to climbs, and strategies to wasted time, a wild ride at the track."
+    },
+    "correctness_summary": {
+      "narrator": "Roger Kint",
+      "model": "llama3.2:3b",
+      "first_draft_correctness_pct": 86.5,
+      "final_correctness_pct": 100.0,
+      "storylines_passed_first_try": 5,
+      "storylines_total": 8
+    },
+    "storylines": [
+      {
+        "title": "HUL suffers the biggest fall of the race \u2014 down 7 places",
+        "angle": "mistake",
+        "subject": "HUL",
+        "score": 84,
+        "narrative": "HUL suffered a significant setback in the race, plummeting down 7 places. The team's struggles were reflected in their net position change, which fell sharply. This dramatic fall marked a low point for the team, and it will be interesting to see how they respond.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "7"
+          ],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "Hulme suffered a significant setback, plummeting 7 places in the standings, after a disappointing turn of events. This plunge in the rankings marks a stark contrast to the strong start the team had initially shown. The team's overall performance has been marred by inconsistent results, and this latest slide threatens to undo their earlier gains.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": false,
+              "unverified_numbers": [],
+              "subject_mentioned": false,
+              "cited_numbers": [
+                "7"
+              ],
+              "correctness_pct": 50.0
+            }
+          },
+          {
+            "attempt": 2,
+            "narrative": "HUL suffered a significant setback in the race, plummeting down 7 places. The team's struggles were reflected in their net position change, which fell sharply. This dramatic fall marked a low point for the team, and it will be interesting to see how they respond.",
+            "correction_feedback": "- You must explicitly name the subject, \"HUL\" (code HUL), in the paragraph \u2014 do not write about any other driver or team.",
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "7"
+              ],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "Aston Martin extracts the most track position per pit stop",
+        "angle": "achievement",
+        "subject": "Aston Martin",
+        "score": 83.0,
+        "narrative": "Aston Martin has been able to maintain a strong track position through its pit strategy, with the team able to extract a significant gain in position per pit stop. The data suggests that one pit stop often results in a net position change of five. Aston Martin's ability to make this gain is notable, particularly considering the team's pit stop frequency.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "Aston Martin's strategy payed off in a big way, as they managed to extract 83.0 points of track position from a single pit stop, with an impressive 5.0 point gain from their average of 1.0 pit stops. This remarkable performance highlights the team's ability to make the most of every pit stop opportunity. Aston Martin's quick thinking and adjustments led to a significant net position change, cementing their position on the track.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": false,
+              "unverified_numbers": [
+                "83.0"
+              ],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "83.0",
+                "5.0",
+                "1.0"
+              ],
+              "correctness_pct": 75.0
+            }
+          },
+          {
+            "attempt": 2,
+            "narrative": "Aston Martin has been able to maintain a strong track position through its pit strategy, with the team able to extract a significant gain in position per pit stop. The data suggests that one pit stop often results in a net position change of five. Aston Martin's ability to make this gain is notable, particularly considering the team's pit stop frequency.",
+            "correction_feedback": "- These numbers you wrote do NOT appear in the supporting facts and must be removed or replaced: 83.0. Do not substitute a different invented number either \u2014 only use numbers that are literally in the JSON, or describe it in words with no digit at all.",
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "STR hits a tyre cliff on lap 43",
+        "angle": "mistake",
+        "subject": "STR",
+        "score": 61.005,
+        "narrative": "On lap 43, STR's tyres showed alarming signs of degradation, with the team's \"cliff detection\" metric exceeding the established threshold of 1.5, indicating a sharp decline in tyre performance. This sudden drop-off led to a significant increase in tyre degradation, ultimately contributing to the team's struggle. As a result, STR's tyre issues proved costly, with the team ultimately suffering a setback.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "43",
+            "1.5"
+          ],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "On lap 43, STR's tyres showed alarming signs of degradation, with the team's \"cliff detection\" metric exceeding the established threshold of 1.5, indicating a sharp decline in tyre performance. This sudden drop-off led to a significant increase in tyre degradation, ultimately contributing to the team's struggle. As a result, STR's tyre issues proved costly, with the team ultimately suffering a setback.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "43",
+                "1.5"
+              ],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "Haas F1 Team's pit strategy costs them track position",
+        "angle": "mistake",
+        "subject": "Haas F1 Team",
+        "score": 52.5,
+        "narrative": "The Haas F1 Team's decision to take multiple pit stops, resulting in a net position change of minus 7, ultimately cost them valuable track position, with their average pit stops per stop coming in at 2.0. This was a clear example of where their strategy fell short, leading to a loss of ground to their competitors. The team will need to reassess their pit stop strategy to regain lost ground.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "1",
+            "7",
+            "2.0"
+          ],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "The Haas F1 Team's decision to take multiple pit stops, resulting in a net position change of minus 7, ultimately cost them valuable track position, with their average pit stops per stop coming in at 2.0. This was a clear example of where their strategy fell short, leading to a loss of ground to their competitors. The team will need to reassess their pit stop strategy to regain lost ground.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "1",
+                "7",
+                "2.0"
+              ],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "BOT delivers the biggest climb of the race \u2014 up 4 places",
+        "angle": "achievement",
+        "subject": "BOT",
+        "score": 48,
+        "narrative": "In a stunning turn of events, BOT's fortunes drastically shifted as he rose through the ranks, outpacing his previous spot by a considerable margin of four positions. The driver's rapid ascent, coupled with a remarkable net position change of four, left onlookers aghast. This remarkable climb has catapulted BOT firmly into contention for top honors.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "In a stunning turn of events, BOT's fortunes drastically shifted as he rose through the ranks, outpacing his previous spot by a considerable margin of four positions. The driver's rapid ascent, coupled with a remarkable net position change of four, left onlookers aghast. This remarkable climb has catapulted BOT firmly into contention for top honors.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "VER controls the race from the front",
+        "angle": "achievement",
+        "subject": "VER",
+        "score": 48.0,
+        "narrative": "Here's the rewritten paragraph:\n\n\"VER dominated the race from the front, leading a significant number of laps. The Russian driver's control was evident as he sped through the circuit, showcasing his team's superior pit strategy. VER's strong performance saw him take advantage of his teammates' missteps.\"",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "VER dominated the race, leading an impressive 32 laps. The Italian driver's skillful control allowed him to maintain a strong pace throughout, earning him 48.0 points for the effort. His ability to stay ahead of the field was a testament to his exceptional racing abilities.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": false,
+              "unverified_numbers": [
+                "48.0"
+              ],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "32",
+                "48.0"
+              ],
+              "correctness_pct": 66.7
+            }
+          },
+          {
+            "attempt": 2,
+            "narrative": "Here's the rewritten paragraph:\n\n\"VER dominated the race from the front, leading a significant number of laps. The Russian driver's control was evident as he sped through the circuit, showcasing his team's superior pit strategy. VER's strong performance saw him take advantage of his teammates' missteps.\"",
+            "correction_feedback": "- These numbers you wrote do NOT appear in the supporting facts and must be removed or replaced: 48.0. Do not substitute a different invented number either \u2014 only use numbers that are literally in the JSON, or describe it in words with no digit at all.",
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "SAR leaves the most time on the table across the lap",
+        "angle": "mistake",
+        "subject": "SAR",
+        "score": 41.64,
+        "narrative": "SAR's lack of speed was evident as it left 0.694 seconds of potential time on the table across the lap, a stark difference from its theoretical best time of 86.146 seconds, which was surpassed by the competition, while its actual time of 86.84 seconds only added to the disparity.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "0.694",
+            "86.146",
+            "86.84"
+          ],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "SAR's lack of speed was evident as it left 0.694 seconds of potential time on the table across the lap, a stark difference from its theoretical best time of 86.146 seconds, which was surpassed by the competition, while its actual time of 86.84 seconds only added to the disparity.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "0.694",
+                "86.146",
+                "86.84"
+              ],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "GAS runs the most varied tyre strategy of the weekend \u2014 3 stints",
+        "angle": "insight",
+        "subject": "GAS",
+        "score": 18,
+        "narrative": "GAS took a bold approach to tyre management, switching between mediums and hard tyres over three distinct stints. This varied strategy, with each stint comprising nine, nineteen, and nineteen laps, respectively, showcased the team's adaptability. By varying the compound and frequency of pit stops, GAS was able to optimize performance and maximize tyre life.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "GAS took a bold approach to tyre management, switching between mediums and hard tyres over three distinct stints. This varied strategy, with each stint comprising nine, nineteen, and nineteen laps, respectively, showcased the team's adaptability. By varying the compound and frequency of pit stops, GAS was able to optimize performance and maximize tyre life.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-10-31T17:19:45.308566+00:00",
+    "session": "Italian Grand Prix 2023 \u2014 Race",
+    "headline": {
+      "headline": "Pit Stop Fails and Surprising Strategy Moves",
+      "dek": "Tyre troubles and clever tactics defined the drama of the weekend"
+    },
+    "correctness_summary": {
+      "narrator": "Roger Kint",
+      "model": "llama3.2:3b",
+      "first_draft_correctness_pct": 87.1,
+      "final_correctness_pct": 90.6,
+      "storylines_passed_first_try": 5,
+      "storylines_total": 8
+    },
+    "storylines": [
+      {
+        "title": "HUL suffers the biggest fall of the race \u2014 down 7 places",
+        "angle": "mistake",
+        "subject": "HUL",
+        "score": 84,
+        "narrative": "HUL's fortunes took a drastic turn, plummeting down seven places in the race. The team's net position change was a stark indicator of their downfall, a negative seven slide that left them reeling. As the checkered flag waved, HUL was left to ponder the misstep that cost them valuable ground.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "Hans van Manen suffered a significant downturn in his positioning on the track, plummeting a notable 7 places in a single lap. His net position change was the most extreme of the race, marking a substantial decline in his overall standing. This stark reversal is a concerning trend for the team.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": false,
+              "unverified_numbers": [],
+              "subject_mentioned": false,
+              "cited_numbers": [
+                "7"
+              ],
+              "correctness_pct": 50.0
+            }
+          },
+          {
+            "attempt": 2,
+            "narrative": "HUL's fortunes took a drastic turn, plummeting down seven places in the race. The team's net position change was a stark indicator of their downfall, a negative seven slide that left them reeling. As the checkered flag waved, HUL was left to ponder the misstep that cost them valuable ground.",
+            "correction_feedback": "- You must explicitly name the subject, \"HUL\" (code HUL), in the paragraph \u2014 do not write about any other driver or team.",
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "Aston Martin extracts the most track position per pit stop",
+        "angle": "achievement",
+        "subject": "Aston Martin",
+        "score": 83.0,
+        "narrative": "Aston Martin's pit strategy was a key factor in securing track position, as they consistently extracted an average net gain of 5 positions per pit stop. This was achieved through a carefully managed approach, allowing the team to minimize losses and maximize gains. By making the most of their pit stops, Aston Martin was able to maintain a strong grip on the track.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "5"
+          ],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "Aston Martin's pit strategy was a key factor in securing track position, as they consistently extracted an average net gain of 5 positions per pit stop. This was achieved through a carefully managed approach, allowing the team to minimize losses and maximize gains. By making the most of their pit stops, Aston Martin was able to maintain a strong grip on the track.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "5"
+              ],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "STR hits a tyre cliff on lap 43",
+        "angle": "mistake",
+        "subject": "STR",
+        "score": 61.005,
+        "narrative": "On lap 43, STR's tyre degradation spiked, hitting a critical threshold of 4.067, which is 1.5 times the warning level, signaling a major issue. This alarming reading was detected during the 2nd stint, a stark contrast to the earlier, more stable performance. The stark warning signalled a critical mistake for the team.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "43",
+            "4.067",
+            "1.5",
+            "2"
+          ],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "On lap 43, STR's tyre degradation spiked, hitting a critical threshold of 4.067, which is 1.5 times the warning level, signaling a major issue. This alarming reading was detected during the 2nd stint, a stark contrast to the earlier, more stable performance. The stark warning signalled a critical mistake for the team.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "43",
+                "4.067",
+                "1.5",
+                "2"
+              ],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "Haas F1 Team's pit strategy costs them track position",
+        "angle": "mistake",
+        "subject": "Haas F1 Team",
+        "score": 52.5,
+        "narrative": "Haas F1 Team's two pit stops cost them a significant seven positions on the track. This was largely due to a slower average pit stop time of two stops, resulting in a net loss of 3.5 positions. The team's inability to turn this into a gain highlights a key strategic misstep.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "1",
+            "3.5"
+          ],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "Haas F1 Team's two pit stops cost them a significant seven positions on the track. This was largely due to a slower average pit stop time of two stops, resulting in a net loss of 3.5 positions. The team's inability to turn this into a gain highlights a key strategic misstep.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "1",
+                "3.5"
+              ],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "BOT delivers the biggest climb of the race \u2014 up 4 places",
+        "angle": "achievement",
+        "subject": "BOT",
+        "score": 48,
+        "narrative": "With a surge up 4 places, BOT's impressive climb showcased the team's resilience. Despite starting from a deeper position, BOT managed to gain 4 spots, a testament to their ability to adapt and capitalize on opportunities. This remarkable turnaround has catapulted BOT into contention for the remainder of the race.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "4",
+            "4"
+          ],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "With a surge up 4 places, BOT's impressive climb showcased the team's resilience. Despite starting from a deeper position, BOT managed to gain 4 spots, a testament to their ability to adapt and capitalize on opportunities. This remarkable turnaround has catapulted BOT into contention for the remainder of the race.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "4",
+                "4"
+              ],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "VER controls the race from the front",
+        "angle": "achievement",
+        "subject": "VER",
+        "score": 48.0,
+        "narrative": "As the race unfolded, Max Verstappen took control from the front, showcasing his impressive skills behind the wheel. He led 32 laps, demonstrating his team's ability to manage the pace. With this dominant performance, Verstappen proved himself to be a formidable contender on the track.",
+        "verification": {
+          "passed": false,
+          "unverified_numbers": [],
+          "subject_mentioned": false,
+          "cited_numbers": [
+            "32"
+          ],
+          "correctness_pct": 50.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "VER dominated the race from pole position, controlling the pace for 32 laps. His team's strategy paid off, as he was able to maintain a consistent pace throughout. VER's impressive drive earned him a score of 48.0, solidifying his team's position at the front.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": false,
+              "unverified_numbers": [
+                "48.0"
+              ],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "32",
+                "48.0"
+              ],
+              "correctness_pct": 66.7
+            }
+          },
+          {
+            "attempt": 2,
+            "narrative": "As the race unfolded, Max Verstappen took control from the front, showcasing his impressive skills behind the wheel. He led 32 laps, demonstrating his team's ability to manage the pace. With this dominant performance, Verstappen proved himself to be a formidable contender on the track.",
+            "correction_feedback": "- These numbers you wrote do NOT appear in the supporting facts and must be removed or replaced: 48.0. Do not substitute a different invented number either \u2014 only use numbers that are literally in the JSON, or describe it in words with no digit at all.",
+            "verification": {
+              "passed": false,
+              "unverified_numbers": [],
+              "subject_mentioned": false,
+              "cited_numbers": [
+                "32"
+              ],
+              "correctness_pct": 50.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "SAR leaves the most time on the table across the lap",
+        "angle": "mistake",
+        "subject": "SAR",
+        "score": 41.64,
+        "narrative": "During the lap, SAR left the most time on the table, failing to bridge the gap between their theoretical best lap and actual performance. The team's theoretical best lap was 86 seconds, while their actual time was 86.84 seconds, a difference of 0.694 seconds. This mistake proved costly.",
+        "verification": {
+          "passed": false,
+          "unverified_numbers": [
+            "86"
+          ],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "86",
+            "86.84",
+            "0.694"
+          ],
+          "correctness_pct": 75.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "SAR lost a significant amount of time on the track, with their theoretical best lap time of 86.146 seconds only slightly better than their actual lap time of 86.84 seconds, resulting in a gap of 0.694 seconds. This discrepancy highlights a missed opportunity for the driver to shave precious milliseconds off their lap. As a result, SAR was left with a noticeable time deficit, a crucial aspect in F1 racing.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": false,
+              "unverified_numbers": [
+                "1"
+              ],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "86.146",
+                "86.84",
+                "0.694",
+                "1"
+              ],
+              "correctness_pct": 80.0
+            }
+          },
+          {
+            "attempt": 2,
+            "narrative": "During the lap, SAR left the most time on the table, failing to bridge the gap between their theoretical best lap and actual performance. The team's theoretical best lap was 86 seconds, while their actual time was 86.84 seconds, a difference of 0.694 seconds. This mistake proved costly.",
+            "correction_feedback": "- These numbers you wrote do NOT appear in the supporting facts and must be removed or replaced: 1. Do not substitute a different invented number either \u2014 only use numbers that are literally in the JSON, or describe it in words with no digit at all.",
+            "verification": {
+              "passed": false,
+              "unverified_numbers": [
+                "86"
+              ],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "86",
+                "86.84",
+                "0.694"
+              ],
+              "correctness_pct": 75.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "GAS runs the most varied tyre strategy of the weekend \u2014 3 stints",
+        "angle": "insight",
+        "subject": "GAS",
+        "score": 18,
+        "narrative": "GAS ran a unique tyre strategy, completing three stints on the track. The driver made two switches to a harder compound, with the first switch happening on lap 12 and the second on lap 30. This varied approach to tyre management allowed GAS to maintain a strong pace throughout the weekend.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "12",
+            "30"
+          ],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "GAS ran a unique tyre strategy, completing three stints on the track. The driver made two switches to a harder compound, with the first switch happening on lap 12 and the second on lap 30. This varied approach to tyre management allowed GAS to maintain a strong pace throughout the weekend.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "12",
+                "30"
+              ],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-10-31T17:21:14.747291+00:00",
+    "session": "Hungarian Grand Prix 2026 \u2014 Race",
+    "headline": {
+      "headline": " tyre titans and strategic stumbles dominate F1 weekend",
+      "dek": "Pit lane heroes and pit lane pitfalls define a race to remember"
+    },
+    "correctness_summary": {
+      "narrator": "Roger Kint",
+      "model": "llama3.2:3b",
+      "first_draft_correctness_pct": 75.6,
+      "final_correctness_pct": 81.9,
+      "storylines_passed_first_try": 4,
+      "storylines_total": 8
+    },
+    "storylines": [
+      {
+        "title": "RUS delivers the biggest climb of the race \u2014 up 12 places",
+        "angle": "achievement",
+        "subject": "RUS",
+        "score": 144,
+        "narrative": "RUS's impressive surge was the story of the race, as the Russian driver made up 12 positions, catapulting from 24th to 12th place. The team's recovery was remarkable, driven by a fierce determination to improve their racing performance. With a strong rebound, RUS has proved once again that they are a force to be reckoned with on the track.",
+        "verification": {
+          "passed": false,
+          "unverified_numbers": [
+            "24"
+          ],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "12",
+            "24",
+            "12"
+          ],
+          "correctness_pct": 75.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "In a stunning reversal, Nicholas Latifi was up 12 places, climbing to the 144th position on the grid. This remarkable turnaround, from 156th to 144th, was the largest net position change of the race, showcasing the resilience of the Russian driver. The impressive recovery demonstrated Latifi's ability to adapt and capitalize on opportunities during the event.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": false,
+              "unverified_numbers": [
+                "144",
+                "156",
+                "144"
+              ],
+              "subject_mentioned": false,
+              "cited_numbers": [
+                "12",
+                "144",
+                "156",
+                "144"
+              ],
+              "correctness_pct": 20.0
+            }
+          },
+          {
+            "attempt": 2,
+            "narrative": "RUS's impressive surge was the story of the race, as the Russian driver made up 12 positions, catapulting from 24th to 12th place. The team's recovery was remarkable, driven by a fierce determination to improve their racing performance. With a strong rebound, RUS has proved once again that they are a force to be reckoned with on the track.",
+            "correction_feedback": "- These numbers you wrote do NOT appear in the supporting facts and must be removed or replaced: 144, 156. Do not substitute a different invented number either \u2014 only use numbers that are literally in the JSON, or describe it in words with no digit at all.\n- You must explicitly name the subject, \"RUS\" (code RUS), in the paragraph \u2014 do not write about any other driver or team.",
+            "verification": {
+              "passed": false,
+              "unverified_numbers": [
+                "24"
+              ],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "12",
+                "24",
+                "12"
+              ],
+              "correctness_pct": 75.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "Mercedes extracts the most track position per pit stop",
+        "angle": "achievement",
+        "subject": "Mercedes",
+        "score": 120.5,
+        "narrative": "Mercedes' pit crew was remarkably efficient, securing an average net position change of 15 per pit stop. The team's strategy paid off with an average of 2 pit stops per car, yielding a value of 7.5, which translates to the most track position per pit stop. This efficiency gave Mercedes a clear edge in the pit lane.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "15",
+            "2",
+            "7.5"
+          ],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "Mercedes' pit crew was remarkably efficient, securing an average net position change of 15 per pit stop. The team's strategy paid off with an average of 2 pit stops per car, yielding a value of 7.5, which translates to the most track position per pit stop. This efficiency gave Mercedes a clear edge in the pit lane.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "15",
+                "2",
+                "7.5"
+              ],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "PER hits a tyre cliff on lap 41",
+        "angle": "mistake",
+        "subject": "PER",
+        "score": 75.55499999999999,
+        "narrative": "Peron has suffered a setback, hitting the wall on lap 41, a stark contrast to the promising display of tyre degradation that preceded it, as evidenced by the 2.0 stint duration and a cliff detection value of 5.037, exceeding the threshold of 1.5.",
+        "verification": {
+          "passed": false,
+          "unverified_numbers": [],
+          "subject_mentioned": false,
+          "cited_numbers": [
+            "41",
+            "2.0",
+            "5.037",
+            "1.5"
+          ],
+          "correctness_pct": 80.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "Perestiani was struggling to stay on track, as the tyre degradation indicated a significant issue on lap 41, with a clear trend of decline that surpassed the safety margin. The driver's stint had reached 2.0 units, but the critical reading was the cliff detection value of 5.037, which spiked alarmingly when compared to the threshold of 1.5. This stark deterioration likely contributed to the team's mistake.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": false,
+              "unverified_numbers": [],
+              "subject_mentioned": false,
+              "cited_numbers": [
+                "41",
+                "2.0",
+                "5.037",
+                "1.5"
+              ],
+              "correctness_pct": 80.0
+            }
+          },
+          {
+            "attempt": 2,
+            "narrative": "Peron has suffered a setback, hitting the wall on lap 41, a stark contrast to the promising display of tyre degradation that preceded it, as evidenced by the 2.0 stint duration and a cliff detection value of 5.037, exceeding the threshold of 1.5.",
+            "correction_feedback": "- You must explicitly name the subject, \"PER\" (code PER), in the paragraph \u2014 do not write about any other driver or team.",
+            "verification": {
+              "passed": false,
+              "unverified_numbers": [],
+              "subject_mentioned": false,
+              "cited_numbers": [
+                "41",
+                "2.0",
+                "5.037",
+                "1.5"
+              ],
+              "correctness_pct": 80.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "BOT's average is dragged up by a handful of slow laps",
+        "angle": "mistake",
+        "subject": "BOT",
+        "score": 56.4,
+        "narrative": "The usually reliable pace of BOT was dragged down by a handful of subpar laps, raising questions about the team's consistency. BOT's average pace was marred by a number of slow periods, which dragged the overall score down. This trend was highlighted by the fact that BOT struggled to keep a consistent pace throughout the session.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "Despite a solid average lap time of 56.4 seconds, Bottas's weekend was marred by a few slow laps that dragged down his overall performance. His fastest lap, a 89.943-second speed, was somewhat misleading, as it was accompanied by several laps that clocked in at 90.3 seconds or more. This inconsistency suggests that Bottas still needs to fine-tune his car's setup to achieve a more consistent pace.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": false,
+              "unverified_numbers": [
+                "56.4",
+                "90.3"
+              ],
+              "subject_mentioned": false,
+              "cited_numbers": [
+                "56.4",
+                "89.943",
+                "90.3"
+              ],
+              "correctness_pct": 25.0
+            }
+          },
+          {
+            "attempt": 2,
+            "narrative": "The usually reliable pace of BOT was dragged down by a handful of subpar laps, raising questions about the team's consistency. BOT's average pace was marred by a number of slow periods, which dragged the overall score down. This trend was highlighted by the fact that BOT struggled to keep a consistent pace throughout the session.",
+            "correction_feedback": "- These numbers you wrote do NOT appear in the supporting facts and must be removed or replaced: 56.4, 90.3. Do not substitute a different invented number either \u2014 only use numbers that are literally in the JSON, or describe it in words with no digit at all.\n- You must explicitly name the subject, \"BOT\" (code BOT), in the paragraph \u2014 do not write about any other driver or team.",
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "SAI manages the soft tyre best",
+        "angle": "achievement",
+        "subject": "SAI",
+        "score": 53.980000000000004,
+        "narrative": "SAI's soft tyre strategy paid off as they expertly managed the degradation of their tyre compounds, achieving a degradation slope of just over -0.24 seconds per lap over their 17-lap stint. This was a testament to their tire management skills, allowing them to maintain a consistent pace throughout. By doing so, they showcased a keen understanding of how to optimize their soft tyres for maximum performance.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "-0.24",
+            "17"
+          ],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "SAI's soft tyre strategy paid off as they expertly managed the degradation of their tyre compounds, achieving a degradation slope of just over -0.24 seconds per lap over their 17-lap stint. This was a testament to their tire management skills, allowing them to maintain a consistent pace throughout. By doing so, they showcased a keen understanding of how to optimize their soft tyres for maximum performance.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "-0.24",
+                "17"
+              ],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "OCO suffers the biggest fall of the race \u2014 down 4 places",
+        "angle": "mistake",
+        "subject": "OCO",
+        "score": 48,
+        "narrative": "Oscar Piastri's race took a dramatic turn on the podium, as he fell four places after a misstep. The Australian driver was left reeling from a net position change of four, a result that showcased the magnitude of his mistake. Piastri's performance was marked by a significant downward swing, a stark contrast to his initial momentum.",
+        "verification": {
+          "passed": false,
+          "unverified_numbers": [],
+          "subject_mentioned": false,
+          "cited_numbers": [],
+          "correctness_pct": 0.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "The Formula 1 driver who suffered the biggest fall in the race fell 4 places in a single lap, a stark contrast to their previous performance where they made a net gain of 4 positions. This dramatic change suggests that OCO struggled to maintain their momentum, ultimately paying the price for their earlier gains. A 4-place drop is a significant stumble, one that could have significant implications for their overall result.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": false,
+              "unverified_numbers": [
+                "1"
+              ],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "1",
+                "4",
+                "4",
+                "4"
+              ],
+              "correctness_pct": 80.0
+            }
+          },
+          {
+            "attempt": 2,
+            "narrative": "Oscar Piastri's race took a dramatic turn on the podium, as he fell four places after a misstep. The Australian driver was left reeling from a net position change of four, a result that showcased the magnitude of his mistake. Piastri's performance was marked by a significant downward swing, a stark contrast to his initial momentum.",
+            "correction_feedback": "- These numbers you wrote do NOT appear in the supporting facts and must be removed or replaced: 1. Do not substitute a different invented number either \u2014 only use numbers that are literally in the JSON, or describe it in words with no digit at all.",
+            "verification": {
+              "passed": false,
+              "unverified_numbers": [],
+              "subject_mentioned": false,
+              "cited_numbers": [],
+              "correctness_pct": 0.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "Haas F1 Team's pit strategy costs them track position",
+        "angle": "mistake",
+        "subject": "Haas F1 Team",
+        "score": 37.5,
+        "narrative": "The Haas F1 Team's decision to take on an extra pit stop proved costly as they lost a valuable 5 positions. This decision, which saw their average number of pit stops increase to 2, resulted in a net position change of just -5. Ultimately, this strategy choice yielded a pit stops vs position change value of -2.5.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "1",
+            "5",
+            "2",
+            "-5",
+            "-2.5"
+          ],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "The Haas F1 Team's decision to take on an extra pit stop proved costly as they lost a valuable 5 positions. This decision, which saw their average number of pit stops increase to 2, resulted in a net position change of just -5. Ultimately, this strategy choice yielded a pit stops vs position change value of -2.5.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "1",
+                "5",
+                "2",
+                "-5",
+                "-2.5"
+              ],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      },
+      {
+        "title": "GAS runs the most varied tyre strategy of the weekend \u2014 4 stints",
+        "angle": "insight",
+        "subject": "GAS",
+        "score": 24,
+        "narrative": "GAS's approach to tyre management stood out this weekend, with a particularly complex strategy involving four distinct tyre stints. The driver's first stint, lasting 15 laps on medium tyres, was followed by a switch to hard tyres for two stints, the second lasting 20 laps and the third just 13. Finally, a soft tyre stint of the same duration ended the driver's weekend.",
+        "verification": {
+          "passed": true,
+          "unverified_numbers": [],
+          "subject_mentioned": true,
+          "cited_numbers": [
+            "15",
+            "20",
+            "13"
+          ],
+          "correctness_pct": 100.0
+        },
+        "draft_history": [
+          {
+            "attempt": 1,
+            "narrative": "GAS's approach to tyre management stood out this weekend, with a particularly complex strategy involving four distinct tyre stints. The driver's first stint, lasting 15 laps on medium tyres, was followed by a switch to hard tyres for two stints, the second lasting 20 laps and the third just 13. Finally, a soft tyre stint of the same duration ended the driver's weekend.",
+            "correction_feedback": null,
+            "verification": {
+              "passed": true,
+              "unverified_numbers": [],
+              "subject_mentioned": true,
+              "cited_numbers": [
+                "15",
+                "20",
+                "13"
+              ],
+              "correctness_pct": 100.0
+            }
+          }
+        ]
+      }
+    ]
   }
 ]

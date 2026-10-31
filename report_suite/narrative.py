@@ -15,8 +15,14 @@ import re
 import ollama
 
 MODEL = "llama3.2:3b"
+# The narrator's persona, for logs only — never injected into the actual prose. Named after
+# "Verbal" Kint, The Usual Suspects' narrator who spins a detailed, confident story that turns
+# out to be mostly fabricated. That's the exact failure mode this pipeline has to defend
+# against (see the VER/"Charles Leclerc" substitution caught during testing) — the name is a
+# standing reminder that narration is *expected* to be unreliable sometimes, which is why
+# verify_storyline() exists and why every draft gets scored, not just the final one.
+NARRATOR_NAME = "Roger Kint"
 NUMBER_RE = re.compile(r"-?\d+\.\d+|-?\d+")
-CONTEXT_CHARS = 60  # characters scanned on either side of a cited number for attribution
 
 STORY_SYSTEM_PROMPT = """You are a Formula 1 journalist writing one paragraph of a race-weekend \
 feature article, in the style of a motorsport analyst (concise, vivid, specific — not a stats \
@@ -169,7 +175,14 @@ def verify_storyline(narrative: str, storyline: dict, driver_names: dict[str, st
     """Checks (1) every number cited in the narrative exists somewhere in
     supporting_facts, and (2) the storyline's subject is actually named in the
     text — catching the case where the model writes a plausible paragraph
-    about the wrong driver while citing genuine numbers."""
+    about the wrong driver while citing genuine numbers.
+
+    Also scores `correctness_pct`: the fraction of this draft's checkable claims that held up,
+    as a 0-100 number — the knob-tuning metric. A "claim" is either a cited number or the
+    implicit subject-attribution claim (so a draft with zero cited numbers but the wrong
+    subject still scores < 100, not a vacuous pass). This is what turns "did the prompt change
+    help" from a feeling into something you can average across a run and diff between two
+    `report_suite/weekend_story_history.json` entries."""
     driver_names = driver_names or {}
     facts = storyline["supporting_facts"]
     subject = storyline["subject"]
@@ -185,11 +198,16 @@ def verify_storyline(narrative: str, storyline: dict, driver_names: dict[str, st
     candidates = [subject, full_name, full_name.rsplit(" ", 1)[-1] if full_name else ""]
     subject_mentioned = any(_mentions(c, text_lower) for c in candidates)
 
+    total_claims = len(cited_numbers) + 1  # +1 for the implicit subject-attribution claim
+    correct_claims = (len(cited_numbers) - len(unverified)) + (1 if subject_mentioned else 0)
+    correctness_pct = round(100 * correct_claims / total_claims, 1)
+
     return {
         "passed": len(unverified) == 0 and subject_mentioned,
         "unverified_numbers": unverified,
         "subject_mentioned": subject_mentioned,
         "cited_numbers": cited_numbers,
+        "correctness_pct": correctness_pct,
     }
 
 
@@ -226,11 +244,36 @@ from datetime import datetime, timezone
 HISTORY_PATH = os.path.join(os.path.dirname(__file__), "weekend_story_history.json")
 
 
+def _run_correctness_summary(storylines: list[dict]) -> dict:
+    """Aggregate %fact_to_claim correctness across the run — split into first-draft (the
+    narrator's own, unassisted quality — the thing a prompt/model change should actually move)
+    vs. final (after the reliability loop's correction rounds), so a run where the fix-loop
+    papered over a worse first draft doesn't look identical to one that didn't need it."""
+    firsts, finals = [], []
+    for s in storylines:
+        history = s.get("draft_history") or []
+        if history:
+            firsts.append(history[0]["verification"]["correctness_pct"])
+        if s.get("verification"):
+            finals.append(s["verification"]["correctness_pct"])
+    avg = lambda xs: round(sum(xs) / len(xs), 1) if xs else None
+    return {
+        "narrator": NARRATOR_NAME,
+        "model": MODEL,
+        "first_draft_correctness_pct": avg(firsts),
+        "final_correctness_pct": avg(finals),
+        "storylines_passed_first_try": sum(1 for s in storylines if s.get("attempts") == 1 and
+                                            s.get("verification", {}).get("passed")),
+        "storylines_total": len(storylines),
+    }
+
+
 def log_run(session_label: str, headline: dict, storylines: list[dict]) -> None:
     entry = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "session": session_label,
         "headline": headline,
+        "correctness_summary": _run_correctness_summary(storylines),
         "storylines": [
             {"title": s["title"], "angle": s["angle"], "subject": s["subject"],
              "score": s["score"], "narrative": s["narrative"], "verification": s["verification"],

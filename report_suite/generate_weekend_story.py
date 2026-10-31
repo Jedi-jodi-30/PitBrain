@@ -17,6 +17,7 @@ import json
 import math
 import os
 import sys
+import threading
 from html import escape as esc
 
 _REPO_ROOT = os.path.join(os.path.dirname(__file__), "..")
@@ -130,19 +131,44 @@ def _team_strategy_facts_and_chart(facts: list[dict], session, clean_laps, outpu
     return facts_out, chart_abs_path
 
 
-def _team_quali_pace_facts_and_chart(year: int, event: str, output_dir: str) -> tuple[list[dict], str | None]:
+def _fetch_quali_laps(year: int, event: str):
+    quali_session = get_session(year, event, "Q")
+    quali_session.load()  # get_session() doesn't load — only get_clean_laps() does that
+    return quali_session.laps.pick_quicklaps()
+
+
+def _team_quali_pace_facts_and_chart(year: int, event: str, output_dir: str,
+                                      timeout_s: float = 25.0) -> tuple[list[dict], str | None]:
     """Qualifying pace vs top speed, by team — a second, optional session fetch (this is a
     *race*-weekend report; qualifying isn't loaded otherwise). Built from lap-level speed-trap
     columns (SpeedST) already on every lap, same as new_analysis.py's avg_speed_trap/
-    max_speed_by_trap — no telemetry fetch needed. Wrapped in a blanket try/except: qualifying
-    might not be fetchable (cache miss, API hiccup, or this event has no separate quali
-    session) and that must never take down the race report over one optional exhibit."""
-    try:
-        quali_session = get_session(year, event, "Q")
-        quali_session.load()  # get_session() doesn't load — only get_clean_laps() does that
-        quali_laps = quali_session.laps.pick_quicklaps()
-    except Exception:
-        return [], None
+    max_speed_by_trap — no telemetry fetch needed.
+
+    Run under a hard wall-clock timeout, not just a try/except: qualifying might not be
+    fetchable (cache miss, API hiccup, no separate quali session for this event) and a plain
+    except handles all of those — but a network call that hangs instead of raising (seen in
+    practice: FastF1's HTTP calls have no timeout of their own, and a degraded connection can
+    silently drop a request instead of erroring) would never hit that except at all, and this
+    "optional exhibit" would stall the entire report indefinitely. The fetch runs in a plain
+    daemon thread (not a ThreadPoolExecutor — its context manager's shutdown(wait=True) would
+    block on exactly the hung thread we're trying to time out) so a stuck fetch can never block
+    the pipeline past `timeout_s`, nor the process from exiting even if the thread never
+    returns at all."""
+    result: dict = {}
+
+    def _worker():
+        try:
+            result["laps"] = _fetch_quali_laps(year, event)
+        except Exception as e:
+            result["error"] = e
+
+    thread = threading.Thread(target=_worker, daemon=True, name="quali-fetch")
+    thread.start()
+    thread.join(timeout_s)
+    if thread.is_alive() or "laps" not in result:
+        return [], None  # timed out, or the fetch itself raised — either way, skip this exhibit
+
+    quali_laps = result["laps"]
     if quali_laps is None or quali_laps.empty:
         return [], None
 
@@ -431,13 +457,16 @@ def build_storylines(year: int, event: str, session_type: str = "R", top_n: int 
             facts = facts + strategy_facts
             manifest = {**manifest, "team_strategy_efficiency": strategy_chart_abs}
 
-        if session_type == "R":
-            # only for a race-weekend report — fetching quali *as* the quali report itself
-            # would be redundant, and get_session("Q") would just return the same session
-            quali_facts, quali_chart_abs = _team_quali_pace_facts_and_chart(year, event, output_dir)
-            if quali_facts:
-                facts = facts + quali_facts
-                manifest = {**manifest, "team_quali_pace_speed": quali_chart_abs}
+        # TEMPORARILY DISABLED: this second session fetch was still stalling the whole
+        # pipeline even with the thread+timeout guard in _team_quali_pace_facts_and_chart
+        # (see its docstring) — the daemon-thread join itself wasn't enough to unblock
+        # things in practice, root cause not yet confirmed. Re-enable once that's
+        # understood; the function below is untouched and ready to use.
+        # if session_type == "R":
+        #     quali_facts, quali_chart_abs = _team_quali_pace_facts_and_chart(year, event, output_dir)
+        #     if quali_facts:
+        #         facts = facts + quali_facts
+        #         manifest = {**manifest, "team_quali_pace_speed": quali_chart_abs}
     except Exception as e:
         return {"error": f"{type(e).__name__}: {e}"}
 
