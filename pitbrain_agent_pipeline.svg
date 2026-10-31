@@ -1,125 +1,114 @@
-<svg viewBox="0 0 1000 860" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A Supervision Agent validates the request's scope, catches failures from any stage, holds multi-turn context, and gates final delivery. It delegates to an Intent Parser Agent, then a tool-calling Analysis Agent (which selects one of three tools grounded in the Analysis Catalog), then a Reporting Agent; before publishing, a Reliability Layer compares every quoted number in the draft against ground truth, corrects deviations, and logs the correction.">
+<svg viewBox="0 0 1180 920" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PitBrain's agent pipeline is a LangGraph StateGraph. A Supervisor agent tool-calls one of three capabilities based on reasoning about the query, not a rigid intent match. An Analysis stage runs deterministic, per-session-cached metrics and storyline mining. A Narration stage drafts prose per storyline with a local model. A Reliability agent has two jobs: it hard-blocks the whole run if analysis itself errored or came back empty, and it fact-checks every narrated number against that storyline's own supporting facts, looping back to Narration with targeted correction feedback for up to two redraft rounds. Only storylines that pass are published; a storyline still failing after its redraft is excluded from the report, not shown with a warning. Every draft and verdict is logged for audit regardless.">
 <style>
-  .box-title { font-family: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif; font-weight: 600; font-size: 14px; fill: #16181b; }
-  .box-sub { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace; font-size: 10.5px; fill: #6b7178; }
-  .arrow-label { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace; font-size: 10.5px; fill: #6b7178; }
-  .pill-text { font-family: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif; font-weight: 600; font-size: 14px; fill: #16181b; }
-  .rel-title { font-family: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif; font-weight: 600; font-size: 13px; fill: #c2540f; }
-  .rel-sub { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace; font-size: 10px; fill: #6b7178; }
-  .step-text { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace; font-size: 10.5px; fill: #c2540f; }
-  .group-label { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace; font-size: 10.5px; fill: #6b7178; letter-spacing: 0.04em; }
+  .box-title { font-family: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif; font-weight: 700; font-size: 16px; fill: #ffffff; }
+  .box-sub { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace; font-size: 10.5px; fill: #ffffff; opacity: 0.92; }
+  .h1 { font-family: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif; font-weight: 700; font-size: 22px; fill: #14171a; }
+  .h2 { font-family: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif; font-style: italic; font-size: 13px; fill: #54606b; }
+  .arrow-label { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace; font-size: 10px; fill: #6b7178; }
+  .loop-label { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace; font-size: 10px; fill: #6b3fa0; font-style: italic; }
+  .gray-label { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace; font-size: 10px; fill: #868f97; font-style: italic; }
+  .foot-title { font-family: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif; font-weight: 700; font-size: 13px; fill: #14171a; }
+  .foot-body { font-family: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif; font-size: 11.5px; fill: #3c4652; }
+  .foot-note { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace; font-size: 10.5px; fill: #868f97; font-style: italic; }
 </style>
-<rect x="0" y="0" width="1000" height="860" fill="#f6f6f4" />
+<rect x="0" y="0" width="1180" height="920" fill="#f6f6f4" />
 
-        <defs>
-          <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M0,0 L10,5 L0,10 z" fill="#16181b" />
-          </marker>
-          <marker id="arrowAccent" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M0,0 L10,5 L0,10 z" fill="#c2540f" />
-          </marker>
-        </defs>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#16181b" />
+  </marker>
+  <marker id="arrowGray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#9aa2a9" />
+  </marker>
+  <marker id="arrowPurple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#6b3fa0" />
+  </marker>
+</defs>
 
-        <!-- User's request -->
-        <rect x="400" y="16" width="200" height="40" rx="20" fill="none" stroke="#16181b" stroke-width="1.5" />
-        <text x="500" y="41" text-anchor="middle" class="pill-text">User's request</text>
+<text x="40" y="46" class="h1">PitBrain agent pipeline — supervisor/graph.py</text>
+<text x="40" y="70" class="h2">a real LangGraph StateGraph, not a conceptual diagram</text>
 
-        <!-- arrow to Supervision -->
-        <line x1="500" y1="56" x2="500" y2="94" stroke="#16181b" stroke-width="1.5" marker-end="url(#arrow)" />
-        <text x="514" y="80" class="arrow-label">submits</text>
+<!-- Row 1 (y 110-200): User query (x 30-170, cx 100) -> Supervisor (220-440, cx 330)
+     -> Analysis (490-720, cx 605)   ...   Report (820-970, cx 895) -->
 
-        <!-- Supervision Agent (emphasized) -->
-        <rect x="320" y="96" width="360" height="64" rx="8" fill="#ffffff" stroke="#16181b" stroke-width="3" />
-        <text x="500" y="117" text-anchor="middle" class="box-title">Supervision Agent</text>
-        <text x="500" y="134" text-anchor="middle" class="box-sub">validates scope · catches stage failures</text>
-        <text x="500" y="149" text-anchor="middle" class="box-sub">holds multi-turn context · gates delivery</text>
+<rect x="30" y="120" width="140" height="70" rx="10" fill="#3c4652" />
+<text x="100" y="150" text-anchor="middle" class="box-title">User query</text>
+<text x="100" y="168" text-anchor="middle" class="box-sub">plain English</text>
+<path d="M170,155 L218,155" stroke="#16181b" stroke-width="1.8" marker-end="url(#arrow)" fill="none" />
 
-        <line x1="500" y1="160" x2="500" y2="198" stroke="#16181b" stroke-width="1.5" marker-end="url(#arrow)" />
-        <text x="514" y="184" class="arrow-label">delegates</text>
+<rect x="220" y="110" width="220" height="90" rx="10" fill="#2a78d6" />
+<text x="330" y="146" text-anchor="middle" class="box-title">Supervisor</text>
+<text x="330" y="166" text-anchor="middle" class="box-sub">tool-calling · llama3.2:3b</text>
+<text x="330" y="182" text-anchor="middle" class="box-sub">reasons about phrasing</text>
+<path d="M440,155 L488,155" stroke="#16181b" stroke-width="1.8" marker-end="url(#arrow)" fill="none" />
+<text x="330" y="222" text-anchor="middle" class="arrow-label">run_weekend_rundown · run_pace_analysis · run_driver_comparison</text>
 
-        <!-- Intent Parser Agent -->
-        <rect x="320" y="200" width="360" height="70" rx="8" fill="#ffffff" stroke="#16181b" stroke-width="1.5" />
-        <text x="500" y="223" text-anchor="middle" class="box-title">Intent Parser Agent</text>
-        <text x="500" y="241" text-anchor="middle" class="box-sub">llama3.2:3b</text>
-        <text x="500" y="257" text-anchor="middle" class="box-sub">session · analysis_type · drivers · year</text>
+<rect x="490" y="110" width="230" height="90" rx="10" fill="#0f8a8a" />
+<text x="605" y="146" text-anchor="middle" class="box-title">Analysis</text>
+<text x="605" y="166" text-anchor="middle" class="box-sub">deterministic · session-cached</text>
+<text x="605" y="182" text-anchor="middle" class="box-sub">18 storyline detectors</text>
+<path d="M605,200 L605,248" stroke="#16181b" stroke-width="1.8" marker-end="url(#arrow)" fill="none" />
 
-        <line x1="500" y1="270" x2="500" y2="308" stroke="#16181b" stroke-width="1.5" marker-end="url(#arrow)" />
-        <text x="514" y="294" class="arrow-label">structured intent</text>
+<rect x="820" y="110" width="150" height="90" rx="10" fill="#1a7a43" />
+<text x="895" y="146" text-anchor="middle" class="box-title">Report</text>
+<text x="895" y="166" text-anchor="middle" class="box-sub">verified storylines</text>
+<text x="895" y="182" text-anchor="middle" class="box-sub">only, ever</text>
 
-        <!-- Analysis Agent -->
-        <rect x="320" y="310" width="360" height="76" rx="8" fill="#ffffff" stroke="#16181b" stroke-width="1.5" />
-        <text x="500" y="332" text-anchor="middle" class="box-title">Analysis Agent</text>
-        <text x="500" y="350" text-anchor="middle" class="box-sub">llama3.2:3b · tool-calling</text>
-        <text x="500" y="366" text-anchor="middle" class="box-sub">picks the tool for the requested analysis</text>
+<!-- Row 2 (y 250-340): Narration (490-720, cx 605) -> Reliability (770-1020, cx 895,
+     centered under Report so the vertical arrow up to Report is a straight line) -->
 
-        <!-- branch to tools -->
-        <line x1="680" y1="348" x2="722" y2="348" stroke="#16181b" stroke-width="1.5" />
-        <text x="722" y="298" class="group-label">tools ↳</text>
-        <line x1="722" y1="321" x2="722" y2="405" stroke="#16181b" stroke-width="1.5" />
-        <line x1="722" y1="321" x2="732" y2="321" stroke="#16181b" stroke-width="1.5" marker-end="url(#arrow)" />
-        <line x1="722" y1="348" x2="732" y2="348" stroke="#16181b" stroke-width="1.5" marker-end="url(#arrow)" />
-        <line x1="722" y1="405" x2="732" y2="405" stroke="#16181b" stroke-width="1.5" marker-end="url(#arrow)" />
+<rect x="490" y="250" width="230" height="90" rx="10" fill="#eb6834" />
+<text x="605" y="286" text-anchor="middle" class="box-title">Narration</text>
+<text x="605" y="306" text-anchor="middle" class="box-sub">drafts prose per storyline</text>
+<text x="605" y="322" text-anchor="middle" class="box-sub">llama3.2:3b</text>
+<path d="M720,295 L768,295" stroke="#16181b" stroke-width="1.8" marker-end="url(#arrow)" fill="none" />
 
-        <rect x="732" y="304" width="232" height="34" rx="6" fill="#ffffff" stroke="#16181b" stroke-width="1.3" />
-        <text x="848" y="325" text-anchor="middle" class="box-sub" style="font-size:11px">Race / Qualifying analysis</text>
+<rect x="770" y="250" width="250" height="90" rx="10" fill="#6b3fa0" />
+<text x="895" y="282" text-anchor="middle" class="box-title">Reliability</text>
+<text x="895" y="302" text-anchor="middle" class="box-sub">1. analysis-error hard gate</text>
+<text x="895" y="318" text-anchor="middle" class="box-sub">2. per-storyline fact-check</text>
 
-        <rect x="732" y="331" width="232" height="34" rx="6" fill="#ffffff" stroke="#16181b" stroke-width="1.3" />
-        <text x="848" y="352" text-anchor="middle" class="box-sub" style="font-size:11px">Comparison analysis</text>
+<!-- redraft loop, drawn above the Narration/Reliability gap -->
+<path d="M770,275 C 745,240 720,240 720,275" stroke="#6b3fa0" stroke-width="1.6" fill="none" stroke-dasharray="5,3" marker-end="url(#arrowPurple)" />
+<text x="745" y="225" text-anchor="middle" class="loop-label">redraft ≤2 rounds,</text>
+<text x="745" y="238" text-anchor="middle" class="loop-label">targeted correction feedback</text>
 
-        <rect x="732" y="388" width="232" height="34" rx="6" fill="#ffffff" stroke="#16181b" stroke-width="1.3" />
-        <text x="848" y="409" text-anchor="middle" class="box-sub" style="font-size:11px">Track analysis</text>
+<!-- Reliability -> Report: straight vertical, both centered on x=895 -->
+<path d="M895,250 L895,202" stroke="#16181b" stroke-width="1.8" marker-end="url(#arrow)" fill="none" />
 
-        <!-- Analysis Catalog grounding the tools -->
-        <rect x="807" y="440" width="150" height="36" rx="6" fill="none" stroke="#16181b" stroke-width="1.2" stroke-dasharray="3 3" />
-        <text x="882" y="462" text-anchor="middle" class="box-sub" style="font-size:11px">Analysis Catalog</text>
-        <line x1="882" y1="440" x2="882" y2="424" stroke="#16181b" stroke-width="1.2" marker-end="url(#arrow)" />
-        <text x="888" y="434" class="arrow-label">grounds</text>
+<!-- Row 3 (y 410-500): Blocked (820-970, cx 895) directly below Reliability —
+     straight vertical arrow, no overlap with Reliability (340 -> 410 gap) -->
+<rect x="820" y="410" width="150" height="90" rx="10" fill="#767f86" />
+<text x="895" y="446" text-anchor="middle" class="box-title">Blocked</text>
+<text x="895" y="466" text-anchor="middle" class="box-sub">no report</text>
+<text x="895" y="482" text-anchor="middle" class="box-sub">written</text>
+<path d="M895,340 L895,408" stroke="#16181b" stroke-width="1.8" marker-end="url(#arrow)" fill="none" />
+<text x="975" y="378" class="gray-label">analysis errored / empty</text>
 
-        <line x1="500" y1="386" x2="500" y2="428" stroke="#16181b" stroke-width="1.5" marker-end="url(#arrow)" />
-        <text x="514" y="410" class="arrow-label">facts + chart hints</text>
+<!-- Supervisor -> Blocked (couldn't route): curves down and across, well clear of
+     every box (Supervisor bottom y=200, Blocked left edge x=820,y=455) -->
+<path d="M330,200 C 330,330 450,470 818,460" stroke="#9aa2a9" stroke-width="1.4" fill="none" stroke-dasharray="4,3" marker-end="url(#arrowGray)" />
+<text x="470" y="400" text-anchor="middle" class="gray-label">couldn't determine which</text>
+<text x="470" y="414" text-anchor="middle" class="gray-label">capability to route to</text>
 
-        <!-- Reporting Agent (emphasized) -->
-        <rect x="320" y="430" width="360" height="70" rx="8" fill="#ffffff" stroke="#16181b" stroke-width="3" />
-        <text x="500" y="453" text-anchor="middle" class="box-title">Reporting Agent</text>
-        <text x="500" y="471" text-anchor="middle" class="box-sub">drafts the editorial narrative</text>
-        <text x="500" y="487" text-anchor="middle" class="box-sub">numbers + prose, chart-ready</text>
+<!-- bottom explanation panel -->
+<line x1="30" y1="540" x2="1150" y2="540" stroke="#e1e2e0" stroke-width="1" />
 
-        <line x1="500" y1="500" x2="500" y2="538" stroke="#16181b" stroke-width="1.5" marker-end="url(#arrow)" />
-        <text x="514" y="524" class="arrow-label">draft report</text>
+<text x="40" y="580" class="foot-title">Reliability has two distinct jobs, not one check:</text>
+<text x="40" y="608" class="foot-body">1. Analysis-level gate — if the analysis stage errored or came back empty, the run hard-fails straight to Blocked. No report is</text>
+<text x="55" y="626" class="foot-body">    ever written from bad or missing data.</text>
+<text x="40" y="652" class="foot-body">2. Narration-level fact-check — every number a storyline's drafted paragraph cites must trace back to that storyline's own</text>
+<text x="55" y="670" class="foot-body">    supporting facts, and its subject must actually be named (catches the model substituting a different real driver while</text>
+<text x="55" y="688" class="foot-body">    still citing genuine numbers). A failed check loops back to Narration with the specific correction needed, for up to 2</text>
+<text x="55" y="706" class="foot-body">    rounds — a storyline still failing after that is excluded from the published report entirely, never shown with a caveat.</text>
 
-        <!-- Reliability Layer -->
-        <rect x="250" y="540" width="500" height="200" rx="10" fill="#f5e6dc" stroke="#c2540f" stroke-width="2" />
-        <text x="500" y="565" text-anchor="middle" class="rel-title">Reliability Layer</text>
-        <text x="500" y="581" text-anchor="middle" class="rel-sub">checks the draft before anything publishes</text>
+<text x="40" y="746" class="foot-title">Analysis reaches beyond the metrics catalog for two storylines:</text>
+<text x="40" y="770" class="foot-body">pit-stop strategy efficiency (real counts from raw, unfiltered laps — clean_laps has every pit lap filtered out by definition)</text>
+<text x="40" y="788" class="foot-body">and qualifying pace vs. top speed by team (an optional second session fetch).</text>
 
-        <rect x="270" y="600" width="170" height="50" rx="6" fill="#ffffff" stroke="#c2540f" stroke-width="1.4" />
-        <text x="355" y="620" text-anchor="middle" class="step-text">Compare quoted</text>
-        <text x="355" y="634" text-anchor="middle" class="step-text">numbers ↔ truth</text>
+<text x="40" y="826" class="foot-title">Every run is logged, pass or fail:</text>
+<text x="40" y="850" class="foot-body">supervisor/run_log.json (route + verdict per query) and report_suite/weekend_story_history.json (every draft, every</text>
+<text x="55" y="868" class="foot-body">correction prompt, every verdict per storyline) — so an excluded storyline is auditable even though the report stays clean.</text>
 
-        <line x1="440" y1="625" x2="466" y2="625" stroke="#c2540f" stroke-width="1.5" marker-end="url(#arrowAccent)" />
-
-        <rect x="470" y="600" width="140" height="50" rx="6" fill="#ffffff" stroke="#c2540f" stroke-width="1.4" />
-        <text x="540" y="620" text-anchor="middle" class="step-text">Correct</text>
-        <text x="540" y="634" text-anchor="middle" class="step-text">deviations</text>
-
-        <line x1="610" y1="625" x2="636" y2="625" stroke="#c2540f" stroke-width="1.5" marker-end="url(#arrowAccent)" />
-
-        <rect x="640" y="600" width="90" height="50" rx="6" fill="#ffffff" stroke="#c2540f" stroke-width="1.4" />
-        <text x="685" y="620" text-anchor="middle" class="step-text">Log</text>
-        <text x="685" y="634" text-anchor="middle" class="step-text">record</text>
-
-        <line x1="685" y1="650" x2="685" y2="670" stroke="#c2540f" stroke-width="1.5" marker-end="url(#arrowAccent)" />
-
-        <rect x="630" y="672" width="110" height="32" rx="5" fill="none" stroke="#c2540f" stroke-width="1.2" stroke-dasharray="3 3" />
-        <text x="685" y="692" text-anchor="middle" class="rel-sub">reliability_log</text>
-        <text x="612" y="666" class="rel-sub" text-anchor="end">writes →</text>
-
-        <text x="270" y="716" class="rel-sub">logs every deviation, so PitBrain's track record is auditable over time</text>
-
-        <line x1="500" y1="740" x2="500" y2="778" stroke="#16181b" stroke-width="1.5" marker-end="url(#arrow)" />
-        <text x="514" y="764" class="arrow-label">verified &amp; corrected</text>
-
-        <!-- Verified report -->
-        <rect x="380" y="780" width="240" height="44" rx="22" fill="#ffffff" stroke="#16181b" stroke-width="2" />
-        <text x="500" y="807" text-anchor="middle" class="pill-text">Verified report</text>
-      </svg>
+<text x="40" y="902" class="foot-note">gemma2:2b was dropped for llama3.2:3b throughout — Gemma's Ollama template doesn't support the tool-calling Supervisor and Analysis depend on.</text>
+</svg>
